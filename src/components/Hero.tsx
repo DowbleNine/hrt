@@ -42,30 +42,12 @@ export default function Hero() {
           className="relative group"
         >
           <div className="aspect-video bg-dark-surface rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative">
-            {/* Placeholder Thumbnail */}
+            {/* O vídeo foi removido. Aqui ficará a sua imagem. */}
             <img 
-              src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1200" 
-              alt="Video Thumbnail"
-              className="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700"
+              src="/assets/vsl-imagem.jpg" 
+              alt="Imagem Principal"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
-            {/* Play Button Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <button className="w-20 h-20 bg-neon-green rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(34,197,94,0.6)] group-hover:scale-110 transition-transform">
-                <Play className="text-black fill-black ml-1 w-8 h-8" />
-              </button>
-            </div>
-            
-            {/* Glass decoration */}
-            <div className="absolute bottom-4 left-4 right-4 p-4 glass rounded-xl border border-white/5 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gray-700 animate-pulse" />
-                <div className="space-y-1">
-                  <div className="w-24 h-3 bg-gray-700 rounded animate-pulse" />
-                  <div className="w-16 h-2 bg-gray-800 rounded animate-pulse" />
-                </div>
-              </div>
-              <div className="text-neon-green font-bold text-xs">LIVE NOW</div>
-            </div>
           </div>
           
           {/* Decorative Elements */}
