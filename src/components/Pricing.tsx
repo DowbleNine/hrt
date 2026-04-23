@@ -16,7 +16,8 @@ export default function Pricing() {
             </div>
             
             <div className="mb-8 text-left">
-              <span className="text-4xl font-black text-slate-text">R$ 197</span>
+              <span className="text-sm text-slate-500 line-through block mb-1">De R$ 197</span>
+              <span className="text-4xl font-black text-slate-text">R$ 47,00</span>
               <span className="text-slate-500 text-sm italic"> / Acesso Vitalício</span>
             </div>
             
