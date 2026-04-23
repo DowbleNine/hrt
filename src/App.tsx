@@ -1,34 +1,21 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import Header from './components/Header';
-import Hero from './components/Hero';
-import SocialProof from './components/SocialProof';
-import WhyUs from './components/WhyUs';
-import Modules from './components/Modules';
-import Pricing from './components/Pricing';
-import Footer from './components/Footer';
-
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SalesPage from './pages/SalesPage';
+import GameInterface from './pages/GameInterface';
+import TransitionScreen from './pages/TransitionScreen';
 
 export default function App() {
   return (
-    <div className="min-h-screen">
-      <Header />
-      <main>
-        <Hero />
-        <SocialProof />
-        <WhyUs />
-        <Modules />
-        <Pricing />
-      </main>
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* Tela do Quiz/Gamificada */}
+        <Route path="/" element={<GameInterface />} />
+        
+        {/* Tela de Loading e Validação do Quiz */}
+        <Route path="/transition" element={<TransitionScreen />} />
+        
+        {/* A Landing Page Principal de Oferta (Boss Room) */}
+        <Route path="/boss-room" element={<SalesPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
