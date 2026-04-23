@@ -53,7 +53,8 @@ export default function Pricing() {
             </div>
             
             <div className="mb-8 text-left">
-              <span className="text-4xl font-black neon-text">R$ 997</span>
+              <span className="text-sm text-slate-400 line-through block mb-1">De R$ 497</span>
+              <span className="text-4xl font-black neon-text">R$ 97,00</span>
               <span className="text-slate-400 text-sm italic"> / 1 Ano de Acesso</span>
             </div>
             
