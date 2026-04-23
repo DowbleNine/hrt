@@ -65,7 +65,7 @@ export default function TransitionScreen() {
             </div>
             
             <p className="text-slate-300 text-lg mb-8 leading-relaxed">
-              O sistema confirmou. Seus atributos indicam que você tem o perfil exato de quem consegue faturar pesado nos bastidores (sem colocar o rosto). O seu próximo nível foi desbloqueado!
+              O sistema confirmou. Suas respostas indicam que você tem o perfil exato de quem consegue faturar pesado nos bastidores (sem colocar o rosto). O seu próximo passo foi liberado!
             </p>
 
             {loadingStep === 3 && (
@@ -78,7 +78,7 @@ export default function TransitionScreen() {
                   className="w-full btn-primary flex items-center justify-center gap-2"
                 >
                   <LockOpen size={18} />
-                  ACESSAR MEU LOOT (OFERTA DESBLOQUEADA)
+                  ACESSAR PLATAFORMA (ACESSO LIBERADO)
                 </button>
               </motion.div>
             )}
