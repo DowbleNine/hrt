@@ -18,7 +18,7 @@ export default function TransitionScreen() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-dark-bg text-slate-text flex items-center justify-center p-4 cyber-grid">
+    <div className="min-h-screen bg-dark-bg text-slate-text flex items-center justify-center p-4 cyber-grid scanlines">
       <AnimatePresence mode="wait">
         
         {loadingStep < 2 ? (

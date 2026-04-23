@@ -84,7 +84,7 @@ export default function GameInterface() {
   const currentQ = questions[step - 1];
 
   return (
-    <div className="min-h-screen bg-dark-bg text-slate-text p-4 md:p-8 font-sans cyber-grid flex flex-col">
+    <div className="min-h-screen bg-dark-bg text-slate-text p-4 md:p-8 font-sans cyber-grid scanlines flex flex-col">
       {/* Header Fixo Técnico */}
       <header className="w-full max-w-7xl mx-auto flex items-center justify-between border-b border-white/10 pb-4 mb-8">
         <div className="flex items-center gap-4">

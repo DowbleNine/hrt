@@ -35,15 +35,23 @@
 @layer base {
   body {
     @apply bg-dark-bg text-slate-text font-sans antialiased overflow-x-hidden;
-    /* Cyber Grid Background */
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display font-extrabold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .cyber-grid {
     background-image: 
       linear-gradient(rgba(0, 255, 157, 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(0, 255, 157, 0.03) 1px, transparent 1px);
     background-size: 50px 50px;
   }
-  
+
   /* CRT Scanlines Overlay */
-  body::after {
+  .scanlines::after {
     content: " ";
     display: block;
     position: fixed;
@@ -56,10 +64,6 @@
     background-size: 100% 2px, 3px 100%;
     pointer-events: none;
     opacity: 0.4;
-  }
-
-  h1, h2, h3, h4 {
-    @apply font-display font-extrabold tracking-tight;
   }
 }
 
