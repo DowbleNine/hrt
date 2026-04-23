@@ -44,7 +44,7 @@ export default function Hero() {
           <div className="aspect-video bg-dark-surface rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative">
             {/* O vídeo foi removido. Aqui ficará a sua imagem. */}
             <img 
-              src="/assets/vsl-imagem.jpg" 
+              src="/assets/vsl-imagem.png" 
               alt="Imagem Principal"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
