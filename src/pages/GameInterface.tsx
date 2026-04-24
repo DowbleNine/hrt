@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import { ShieldAlert, Cpu, PackageOpen, Scissors, Brain, Trophy } from 'lucide-react';
 
-type GameStep = 0 | 1 | 1.5 | 2 | 3 | 3.5 | 4 | 5 | 4.5;
+type GameStep = 0 | 1 | 1.5 | 2 | 3 | 3.3 | 3.5 | 4 | 5 | 4.5;
 
 export default function GameInterface() {
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ export default function GameInterface() {
     } else if (currentStep === 2) {
       setStep(3);
     } else if (currentStep === 3) {
-      setStep(3.5);
+      setStep(3.3);
     } else if (currentStep === 4) {
       setStep(4.5);
       // Wait for achievement toast to finish reading
@@ -186,6 +186,58 @@ export default function GameInterface() {
               <div className="mt-8 w-full h-1 bg-slate-800 rounded">
                 <motion.div className="h-full bg-neon-cyan" initial={{ width: "0%" }} animate={{ width: "100%" }} transition={{ duration: 8, ease: "linear" }} />
               </div>
+            </motion.div>
+          )}
+
+          {step === 3.3 && (
+            <motion.div 
+              key="socialproof"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="w-full flex flex-col items-center justify-center gap-6"
+            >
+              <Trophy className="text-neon-cyan w-16 h-16" />
+              <h2 className="text-2xl md:text-3xl font-black text-white text-center uppercase tracking-tight">
+                Os números de nossos alunos não mentem
+              </h2>
+              <p className="text-slate-400 text-sm max-w-md mx-auto text-center">
+                Resultados reais de perfis anônimos que aplicaram o método nos últimos 30 dias.
+              </p>
+
+              {/* Box de Imagens centralizado e sobreposto */}
+              <div className="relative flex justify-center items-center mt-4 mb-10 h-[320px] w-full max-w-lg mx-auto">
+                {/* Imagem Esquerda */}
+                <motion.img 
+                  src="/provas-sociais/prova1.png" 
+                  alt="Prova Social 1"
+                  className="absolute left-6 w-32 md:w-44 h-[260px] md:h-[280px] object-cover rounded-xl border border-neon-cyan/40 shadow-[0_0_20px_rgba(0,255,255,0.1)] rotate-[-10deg] z-10 hover:z-40 transition-all cursor-pointer bg-[#05070a]"
+                  whileHover={{ scale: 1.1, rotate: 0 }}
+                />
+                
+                {/* Imagem Direita */}
+                <motion.img 
+                  src="/provas-sociais/prova3.png" 
+                  alt="Prova Social 3"
+                  className="absolute right-6 w-32 md:w-44 h-[260px] md:h-[280px] object-cover rounded-xl border border-cyan-500/40 shadow-[0_0_20px_rgba(6,182,212,0.1)] rotate-[10deg] z-10 hover:z-40 transition-all cursor-pointer bg-[#05070a]"
+                  whileHover={{ scale: 1.1, rotate: 0 }}
+                />
+
+                {/* Imagem Central (Fica por cima) */}
+                <motion.img 
+                  src="/provas-sociais/prova2.png" 
+                  alt="Prova Social 2"
+                  className="absolute w-36 md:w-52 h-[290px] md:h-[310px] object-cover rounded-xl border-2 border-neon-green/60 shadow-[0_0_30px_rgba(0,255,157,0.25)] z-20 hover:z-40 transition-all cursor-pointer bg-[#05070a]"
+                  whileHover={{ scale: 1.1, rotate: 0 }}
+                />
+              </div>
+
+              <button 
+                onClick={() => setStep(3.5)}
+                className="w-full max-w-sm mt-4 bg-neon-cyan text-black uppercase font-bold tracking-widest py-4 rounded-sm hover:-translate-y-1 shadow-[0_0_20px_rgba(0,255,255,0.3)] transition-all"
+              >
+                [ AVANÇAR ]
+              </button>
             </motion.div>
           )}
 
