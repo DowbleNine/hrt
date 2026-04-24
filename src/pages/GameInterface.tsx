@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import { ShieldAlert, Cpu, PackageOpen, Scissors, Brain, Trophy } from 'lucide-react';
+import FakeAnalytics from '../components/FakeAnalytics';
 
 type GameStep = 0 | 1 | 1.5 | 2 | 3 | 3.3 | 3.5 | 4 | 5 | 4.5;
 
@@ -67,8 +68,8 @@ export default function GameInterface() {
       setStep(3.3);
     } else if (currentStep === 4) {
       setStep(4.5);
-      // Wait for achievement toast to finish reading
-      setTimeout(() => navigate('/transition'), 3500);
+      // Wait for achievement toast to finish reading and analytics graph to fill
+      setTimeout(() => navigate('/transition'), 5500);
     }
   };
 
@@ -303,6 +304,10 @@ export default function GameInterface() {
                 [ GARANTIR ACESSO E CONTINUAR ]
               </button>
             </motion.div>
+          )}
+
+          {step === 4.5 && (
+            <FakeAnalytics key="analytics" />
           )}
 
           {step === 5 && (
