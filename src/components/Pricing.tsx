@@ -3,7 +3,7 @@ import {motion} from 'motion/react';
 
 export default function Pricing() {
   return (
-    <section className="py-24 bg-dark-bg">
+    <section id="pricing" className="py-24 bg-dark-bg">
       <div className="max-w-7xl mx-auto px-4 text-center">
         <h2 className="text-4xl md:text-5xl mb-16">Escolha o seu plano de ação</h2>
         
@@ -28,9 +28,14 @@ export default function Pricing() {
               <ListItem text="Atualizações Mensais" />
             </ul>
             
-            <button className="mt-8 w-full py-4 bg-slate-800 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-slate-700 transition-colors">
+            <a 
+              href="https://go.use-dice.com/5LEEzq0LYc5x9EonF9qTU04TBq-TNwFE" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="mt-8 w-full py-4 bg-slate-800 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-slate-700 transition-colors text-center inline-block"
+            >
               COMPRAR AGORA
-            </button>
+            </a>
           </div>
           
           {/* Box 2 - Mentoria Elite (Highlighted) */}
@@ -66,9 +71,14 @@ export default function Pricing() {
               <ListItem text="Suporte 24/7 Direto com Mentor" highlighted />
             </ul>
             
-            <button className="mt-8 w-full neon-bg py-4 rounded-xl font-bold uppercase tracking-widest pulse">
+            <a 
+              href="https://go.use-dice.com/5LEEzq0LYc5x9EonF9qTU04TBq-TNwFE" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="mt-8 w-full neon-bg py-4 rounded-xl font-bold text-center inline-block text-black uppercase tracking-widest pulse"
+            >
               QUERO A MENTORIA COMPLETA
-            </button>
+            </a>
           </motion.div>
         </div>
       </div>

@@ -60,16 +60,16 @@ export default function GameInterface() {
 
     if (currentStep === 1) {
       setStep(1.5);
-      // Ajustado para demorar mais e mostrar a vantagem
-      setTimeout(() => setStep(2), 8000);
+      // Ajustado para demorar menos e manter o fluxo rápido
+      setTimeout(() => setStep(2), 3000);
     } else if (currentStep === 2) {
       setStep(3);
     } else if (currentStep === 3) {
       setStep(3.3);
     } else if (currentStep === 4) {
       setStep(4.5);
-      // Wait for achievement toast to finish reading and analytics graph to fill
-      setTimeout(() => navigate('/transition'), 5500);
+      // Wait for achievement toast to finish
+      setTimeout(() => navigate('/transition'), 3000);
     }
   };
 

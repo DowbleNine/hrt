@@ -29,9 +29,9 @@ export default function Hero() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <button className="btn-primary w-full sm:w-auto animate-pulse-neon whitespace-nowrap lg:text-lg">
+            <a href="#pricing" className="btn-primary w-full sm:w-auto animate-pulse-neon whitespace-nowrap lg:text-lg text-center flex items-center justify-center">
               QUERO COMEÇAR MINHA JORNADA VIRAL
-            </button>
+            </a>
           </div>
         </motion.div>
         

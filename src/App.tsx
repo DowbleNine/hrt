@@ -2,6 +2,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SalesPage from './pages/SalesPage';
 import GameInterface from './pages/GameInterface';
 import TransitionScreen from './pages/TransitionScreen';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import SuccessPage from './pages/SuccessPage';
 
 export default function App() {
   return (
@@ -15,6 +18,11 @@ export default function App() {
         
         {/* A Landing Page Principal de Oferta (Boss Room) */}
         <Route path="/boss-room" element={<SalesPage />} />
+
+        {/* Área do Aluno */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/sucesso" element={<SuccessPage />} />
       </Routes>
     </BrowserRouter>
   );

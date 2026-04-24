@@ -1,5 +1,7 @@
 import {Gamepad2} from 'lucide-react';
 
+import { Link } from 'react-router-dom';
+
 export default function Header() {
   return (
     <header className="sticky top-0 z-50 glass">
@@ -13,9 +15,9 @@ export default function Header() {
           </span>
         </div>
         
-        <button className="btn-outline text-sm md:text-base">
+        <Link to="/login" className="btn-outline text-sm md:text-base px-4 py-2 border rounded hover:bg-white/10 transition">
           ÁREA DO ALUNO
-        </button>
+        </Link>
       </div>
     </header>
   );
