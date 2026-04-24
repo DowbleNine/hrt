@@ -205,33 +205,42 @@ export default function GameInterface() {
                 Resultados reais de perfis anônimos que aplicaram o método nos últimos 30 dias.
               </p>
 
-              {/* Box de Imagens centralizado e sobreposto */}
-              <div className="relative flex justify-center items-center mt-4 mb-10 h-[320px] w-full max-w-lg mx-auto">
-                {/* Imagem Esquerda */}
+              {/* Box de Imagens centralizado e sobreposto em Leque */}
+              <div className="flex justify-center items-center mt-8 mb-10 h-auto w-full -space-x-12 md:-space-x-14 mx-auto px-4">
+                {/* Imagem 1 */}
                 <motion.img 
                   src="/provas-sociais/prova1.png" 
                   alt="Prova Social 1"
                   loading="lazy"
-                  className="absolute left-6 w-32 md:w-44 h-[260px] md:h-[280px] object-cover rounded-xl border border-neon-cyan/40 shadow-[0_0_20px_rgba(0,255,255,0.1)] rotate-[-10deg] z-10 hover:z-40 transition-all cursor-pointer bg-[#05070a]"
-                  whileHover={{ scale: 1.1, rotate: 0 }}
+                  className="w-28 md:w-36 h-[220px] md:h-[280px] object-cover rounded-xl border border-neon-cyan/40 shadow-xl rotate-[-12deg] z-10 transition-all cursor-pointer bg-[#05070a] flex-shrink-0"
+                  whileHover={{ scale: 1.2, rotate: 0, zIndex: 50 }}
                 />
                 
-                {/* Imagem Direita */}
-                <motion.img 
-                  src="/provas-sociais/prova3.png" 
-                  alt="Prova Social 3"
-                  loading="lazy"
-                  className="absolute right-6 w-32 md:w-44 h-[260px] md:h-[280px] object-cover rounded-xl border border-cyan-500/40 shadow-[0_0_20px_rgba(6,182,212,0.1)] rotate-[10deg] z-10 hover:z-40 transition-all cursor-pointer bg-[#05070a]"
-                  whileHover={{ scale: 1.1, rotate: 0 }}
-                />
-
-                {/* Imagem Central (Fica por cima) */}
+                {/* Imagem 2 */}
                 <motion.img 
                   src="/provas-sociais/prova2.png" 
                   alt="Prova Social 2"
                   loading="lazy"
-                  className="absolute w-36 md:w-52 h-[290px] md:h-[310px] object-cover rounded-xl border-2 border-neon-green/60 shadow-[0_0_30px_rgba(0,255,157,0.25)] z-20 hover:z-40 transition-all cursor-pointer bg-[#05070a]"
-                  whileHover={{ scale: 1.1, rotate: 0 }}
+                  className="w-28 md:w-36 h-[220px] md:h-[280px] object-cover rounded-xl border border-neon-green/40 shadow-xl rotate-[-4deg] z-20 transition-all cursor-pointer bg-[#05070a] -mt-6 md:-mt-8 flex-shrink-0"
+                  whileHover={{ scale: 1.2, rotate: 0, zIndex: 50 }}
+                />
+
+                {/* Imagem 3 */}
+                <motion.img 
+                  src="/provas-sociais/prova3.png" 
+                  alt="Prova Social 3"
+                  loading="lazy"
+                  className="w-28 md:w-36 h-[220px] md:h-[280px] object-cover rounded-xl border border-neon-cyan/40 shadow-xl rotate-[4deg] z-30 transition-all cursor-pointer bg-[#05070a] -mt-6 md:-mt-8 flex-shrink-0"
+                  whileHover={{ scale: 1.2, rotate: 0, zIndex: 50 }}
+                />
+
+                {/* Imagem 4 */}
+                <motion.img 
+                  src="/provas-sociais/prova4.png" 
+                  alt="Prova Social 4"
+                  loading="lazy"
+                  className="w-28 md:w-36 h-[220px] md:h-[280px] object-cover rounded-xl border border-cyan-500/40 shadow-xl rotate-[12deg] z-20 transition-all cursor-pointer bg-[#05070a] flex-shrink-0"
+                  whileHover={{ scale: 1.2, rotate: 0, zIndex: 50 }}
                 />
               </div>
 
