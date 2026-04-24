@@ -313,7 +313,7 @@ export default function GameInterface() {
               exit={{ opacity: 0, scale: 0.9 }}
               className="w-full card border border-red-500/50 bg-red-950/20 p-8 md:p-12 text-center relative overflow-hidden"
             >
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZjAwMDAiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')] opacity-50" />
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZjAwMDAiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')] opacity-50 pointer-events-none" />
               <ShieldAlert className="mx-auto text-red-500 w-16 h-16 mb-6 animate-pulse" />
               <h1 className="text-4xl font-extrabold text-red-500 uppercase tracking-widest mb-4">
                 ACESSO NEGADO
@@ -323,7 +323,7 @@ export default function GameInterface() {
               </p>
               <button 
                 onClick={() => { setStep(3.5); }}
-                className="w-full border border-red-500 text-red-500 hover:bg-red-500 hover:text-black uppercase font-bold tracking-widest py-4 transition-all"
+                className="relative z-10 w-full border border-red-500 text-red-500 hover:bg-red-500 hover:text-black uppercase font-bold tracking-widest py-4 transition-all"
               >
                 Refazer Última Resposta
               </button>
