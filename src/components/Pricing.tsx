@@ -29,7 +29,7 @@ export default function Pricing() {
             </ul>
             
             <a 
-              href="https://go.use-dice.com/5LEEzq0LYc5x9EonF9qTU04TBq-TNwFE" 
+              href="https://checkout-transparente.com/checkout/5LEEzq0LYc5x9EonF9qTU04TBq-TNwFE/o-guia-viral" 
               target="_blank" 
               rel="noopener noreferrer"
               className="mt-8 w-full py-4 bg-slate-800 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-slate-700 transition-colors text-center inline-block"
@@ -72,7 +72,7 @@ export default function Pricing() {
             </ul>
             
             <a 
-              href="https://go.use-dice.com/5LEEzq0LYc5x9EonF9qTU04TBq-TNwFE" 
+              href="https://checkout-transparente.com/checkout/5LEEzq0LYc5x9EonF9qTU04TBq-TNwFE/o-guia-viral" 
               target="_blank" 
               rel="noopener noreferrer"
               className="mt-8 w-full neon-bg py-4 rounded-xl font-bold text-center inline-block text-black uppercase tracking-widest pulse"
