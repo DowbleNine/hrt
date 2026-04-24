@@ -310,7 +310,7 @@ export default function GameInterface() {
                 Mentalidade incompatível. Se você está buscando apenas apertar um botão e não trabalhar, não há solução mágica que fará o trabalho por você.
               </p>
               <button 
-                onClick={() => { setStep(0); }}
+                onClick={() => { window.location.reload(); }}
                 className="w-full border border-red-500 text-red-500 hover:bg-red-500 hover:text-black uppercase font-bold tracking-widest py-4 transition-all"
               >
                 Recomeçar
