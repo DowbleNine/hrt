@@ -55,9 +55,7 @@ export default function Modules() {
                 {module.description}
               </p>
               
-              <div className="mt-6 flex items-center gap-2 neon-text font-black text-[10px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity">
-                <span>CONTEÚDO ELITE</span>
-              </div>
+
             </motion.div>
           ))}
         </div>
