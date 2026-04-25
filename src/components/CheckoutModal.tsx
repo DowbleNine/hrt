@@ -11,7 +11,7 @@ interface CheckoutModalProps {
   amount: number;
 }
 
-const API_URL = 'https://viral-gamer-api.onrender.com'; // Ou onde seu server estiver rodando
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 export default function CheckoutModal({ isOpen, onClose, productName, amount }: CheckoutModalProps) {
   const [step, setStep] = useState<'info' | 'pix'>('info');
