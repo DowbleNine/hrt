@@ -44,31 +44,41 @@ async function getDiceToken() {
 
 // 1. Gerar Cobrança PIX V2
 app.post('/api/payments/create', async (req, res) => {
-  const { name, email, document, amount, product_name } = req.body;
+  let { name, email, document, amount, product_name } = req.body;
   
-  if (!amount || !product_name) {
+  if (!amount || !product_name || !document) {
     return res.status(400).json({ error: 'Dados insuficientes' });
   }
 
+  // Limpar CPF (deixar apenas números)
+  const cleanDocument = document.replace(/\D/g, '');
+
   const token = await getDiceToken();
-  if (!token) return res.status(500).json({ error: 'Erro de conexão com gateway' });
+  if (!token) {
+    console.error('Falha ao obter token Dice');
+    return res.status(500).json({ error: 'Erro de conexão com gateway (Token)' });
+  }
 
   const external_id = `order_${Date.now()}`;
-  const baseUrl = 'https://hrt-dun.vercel.app'; // URL do seu site
+  const baseUrl = 'https://hrt-dun.vercel.app';
 
   try {
+    console.log('Solicitando PIX para:', { email, amount, product_name });
+    
     const response = await axios.post('https://dev.use-dice.com/api/v2/payments/deposit', {
       product_name: product_name,
       amount: parseFloat(amount),
-      payer: { name, email, document },
+      payer: { name, email, document: cleanDocument },
       external_id,
       clientCallbackUrl: `${baseUrl}/webhook/dice`
     }, {
       headers: { Authorization: `Bearer ${token}` }
     });
 
-    // Registrar transação pendente
-    await supabase.from('transactions').insert({
+    console.log('Resposta Dice:', response.data);
+
+    // Registrar transação pendente no Supabase
+    const { error: dbError } = await supabase.from('transactions').insert({
       email,
       amount: parseFloat(amount),
       status: 'PENDING',
@@ -76,10 +86,16 @@ app.post('/api/payments/create', async (req, res) => {
       external_id
     });
 
+    if (dbError) {
+      console.error('Erro Supabase Insert:', dbError);
+      // Mesmo com erro no banco, vamos retornar o PIX para o usuário não travar
+    }
+
     res.json(response.data);
   } catch (error) {
-    console.error('Erro Criar PIX:', error.response?.data || error.message);
-    res.status(400).json({ error: 'Erro ao gerar cobrança' });
+    const errorData = error.response?.data || error.message;
+    console.error('Erro detalhado Dice V2:', JSON.stringify(errorData));
+    res.status(400).json({ error: errorData });
   }
 });
 
