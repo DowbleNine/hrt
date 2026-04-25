@@ -9,9 +9,9 @@ export default function Pricing() {
         
         <div className="flex flex-col md:flex-row gap-10 items-center justify-center">
           {/* Box 1 - Guia Viral */}
-          <div className="w-full max-w-sm p-8 card flex flex-col h-[600px]">
+          <div className="w-full max-w-sm p-8 card flex flex-col h-[640px] relative">
             <div className="mb-8 text-left">
-              <h3 className="text-2xl font-bold mb-2 uppercase tracking-tighter">O GUIA VIRAL</h3>
+              <h3 className="text-2xl font-bold mb-2 uppercase tracking-tighter text-slate-text">O GUIA VIRAL</h3>
               <p className="text-slate-400 text-sm">O ponto de partida ideal para quem está começando.</p>
             </div>
             
@@ -29,16 +29,14 @@ export default function Pricing() {
             </ul>
             
             <a 
-              href="https://checkout-transparente.com/checkout/5LEEzq0LYc5x9EonF9qTU04TBq-TNwFE/o-guia-viral" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="mt-8 w-full py-4 bg-slate-800 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-slate-700 transition-colors text-center inline-block"
+              href="https://checkout-transparente.com/checkout/5LEEzq0LYc5x9EonF9qTU04TBq-TNwFE/o-guia-viral"
+              className="mt-8 w-full py-4 bg-slate-800 rounded-xl font-bold uppercase tracking-widest hover:bg-slate-700 transition-all text-slate-text text-center block"
             >
               COMPRAR AGORA
             </a>
           </div>
           
-          {/* Box 2 - Mentoria Elite (Highlighted) */}
+          {/* Box 2 - Mentoria Elite */}
           <motion.div 
             initial={{scale: 0.95}}
             whileInView={{scale: 1}}
@@ -72,10 +70,8 @@ export default function Pricing() {
             </ul>
             
             <a 
-              href="https://checkout-transparente.com/checkout/5LEEzq0LYc5x9EonF9qTU04TBq-TNwFE/o-guia-viral" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="mt-8 w-full neon-bg py-4 rounded-xl font-bold text-center inline-block text-black uppercase tracking-widest pulse"
+              href="https://go.use-dice.com/xCHth0se6mlxWMQV6ol0T9feVYoMRA0X"
+              className="mt-8 w-full neon-bg py-4 rounded-xl font-bold text-center text-black uppercase tracking-widest pulse hover:scale-105 transition-all block"
             >
               QUERO A MENTORIA COMPLETA
             </a>

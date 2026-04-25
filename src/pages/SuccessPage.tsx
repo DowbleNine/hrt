@@ -11,6 +11,7 @@ export default function SuccessPage() {
   const navigate = useNavigate();
   
   const email = searchParams.get('email') || '';
+  const tier = searchParams.get('tier') || 'low'; // Pega o tier da URL (low ou high)
 
   const handleCreateAccount = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,19 +21,31 @@ export default function SuccessPage() {
     setLoading(true);
     try {
       // 1. Criar usuário no Supabase Auth
-      const { data, error } = await supabase.auth.signUp({
+      const { error: authError } = await supabase.auth.signUp({
         email,
         password,
       });
 
-      if (error) throw error;
+      // Se o erro for que o usuário já existe, apenas ignoramos e seguimos
+      if (authError && !authError.message.includes('already registered')) {
+        throw authError;
+      }
 
-      // 2. Opcional: Vincular o perfil ao Tier (isso geralmente é feito pelo Webhook no servidor)
-      // Mas podemos forçar o 'low' aqui se não houver registro
-      localStorage.setItem('userTier', 'low');
+      // 2. Criar ou atualizar o perfil com o Tier correto no banco
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .upsert({ 
+          email, 
+          tier,
+          full_name: email.split('@')[0] 
+        });
+
+      if (profileError) console.warn("Erro ao atualizar perfil:", profileError.message);
+
+      localStorage.setItem('userTier', tier);
       navigate('/dashboard');
     } catch (err: any) {
-      alert(err.message || "Erro ao criar conta.");
+      alert(err.message || "Erro ao processar sua conta.");
     } finally {
       setLoading(false);
     }
