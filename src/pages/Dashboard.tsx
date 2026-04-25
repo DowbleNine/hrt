@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Lock, Play, Video, Discord, Trophy, Star, Zap } from 'lucide-react';
+import { Lock, Play, Video, MessageSquare, Trophy, Star, Zap } from 'lucide-react';
 
 export default function Dashboard() {
   const [tier, setTier] = useState<string | null>(null);
@@ -115,7 +115,7 @@ export default function Dashboard() {
 
                 <div className={`p-8 ${isLowTicket ? 'opacity-20 grayscale' : ''}`}>
                   <div className="w-12 h-12 rounded-2xl bg-lime-500/10 flex items-center justify-center mb-6 border border-lime-500/20">
-                    <Discord className="text-lime-400" size={24} />
+                    <MessageSquare className="text-lime-400" size={24} />
                   </div>
                   <h3 className="text-2xl font-black mb-2 text-white uppercase tracking-tighter">Comunidade VIP</h3>
                   <p className="text-sm text-gray-400 mb-8 leading-relaxed">Networking direto com grandes players e suporte individual 24/7.</p>
