@@ -28,7 +28,7 @@ async function getDiceToken() {
   }
 
   try {
-    const response = await axios.post('https://dev.use-dice.com/api/v1/auth/login', {
+    const response = await axios.post('https://api.use-dice.com/api/v1/auth/login', {
       client_id: process.env.DICE_CLIENT_ID,
       client_secret: process.env.DICE_CLIENT_SECRET
     });
@@ -65,7 +65,7 @@ app.post('/api/payments/create', async (req, res) => {
   try {
     console.log('Solicitando PIX para:', { email, amount, product_name });
     
-    const response = await axios.post('https://dev.use-dice.com/api/v2/payments/deposit', {
+    const response = await axios.post('https://api.use-dice.com/api/v2/payments/deposit', {
       product_name: product_name,
       amount: parseFloat(amount),
       payer: { name, email, document: cleanDocument },
@@ -105,7 +105,7 @@ app.get('/api/payments/status/:id', async (req, res) => {
   const token = await getDiceToken();
 
   try {
-    const response = await axios.get(`https://dev.use-dice.com/api/v1/transactions/getStatusTransac/${id}`, {
+    const response = await axios.get(`https://api.use-dice.com/api/v1/transactions/getStatusTransac/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     res.json(response.data);
