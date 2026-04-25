@@ -23,14 +23,20 @@ let diceToken = null;
 let tokenExpiry = null;
 
 async function getDiceToken() {
+  const cid = process.env.DICE_CLIENT_ID;
+  const csk = process.env.DICE_CLIENT_SECRET;
+  
+  console.log('Diagnostic - ID (prefix):', cid ? cid.substring(0, 8) : 'MISSING');
+  console.log('Diagnostic - SECRET (prefix):', csk ? csk.substring(0, 8) : 'MISSING');
+
   if (diceToken && tokenExpiry && Date.now() < tokenExpiry) {
     return diceToken;
   }
 
   try {
     const response = await axios.post('https://api.use-dice.com/api/v1/auth/login', {
-      client_id: process.env.DICE_CLIENT_ID,
-      client_secret: process.env.DICE_CLIENT_SECRET
+      client_id: cid,
+      client_secret: csk
     });
     
     diceToken = response.data.token;
