@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import {Check, Star, Zap, Crown} from 'lucide-react';
 import {motion} from 'motion/react';
+import CheckoutModal from './CheckoutModal';
 
 export default function Pricing() {
+  const [selectedProduct, setSelectedProduct] = useState<{name: string, price: number} | null>(null);
+
   return (
     <section id="pricing" className="py-24 bg-dark-bg relative overflow-hidden">
       {/* Background Decorative Elements */}
@@ -54,7 +58,10 @@ export default function Pricing() {
               <ListItem text="Atualizações Mensais" />
             </ul>
             
-            <button className="mt-auto w-full py-5 bg-white/5 border border-white/10 rounded-2xl font-black uppercase tracking-widest text-white hover:bg-white/10 hover:border-white/20 transition-all active:scale-95">
+            <button 
+              onClick={() => setSelectedProduct({name: 'O GUIA VIRAL', price: 47.00})}
+              className="mt-auto w-full py-5 bg-white/5 border border-white/10 rounded-2xl font-black uppercase tracking-widest text-white hover:bg-white/10 hover:border-white/20 transition-all active:scale-95"
+            >
               COMPRAR AGORA
             </button>
           </motion.div>
@@ -94,12 +101,22 @@ export default function Pricing() {
               <ListItem text="Suporte 24/7 Direto com Mentor" highlighted />
             </ul>
             
-            <button className="mt-auto w-full neon-bg py-5 rounded-2xl font-black text-center text-black uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-neon-green/20 pulse">
+            <button 
+              onClick={() => setSelectedProduct({name: 'MENTORIA ELITE', price: 97.00})}
+              className="mt-auto w-full neon-bg py-5 rounded-2xl font-black text-center text-black uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-neon-green/20 pulse"
+            >
               QUERO A MENTORIA COMPLETA
             </button>
           </motion.div>
         </div>
       </div>
+
+      <CheckoutModal 
+        isOpen={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        productName={selectedProduct?.name || ''}
+        amount={selectedProduct?.price || 0}
+      />
     </section>
   );
 }
