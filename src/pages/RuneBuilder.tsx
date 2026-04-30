@@ -216,12 +216,11 @@ const RuneBuilder: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-20 flex justify-between items-end border-t-4 border-zinc-400/20 pt-10">
-              <div className="max-w-[600px]">
-                <span className="font-bold block text-xl not-italic uppercase tracking-widest opacity-80 mb-4">Nome em Português:</span>
-                <h3 className="text-8xl font-power tracking-tighter text-red-950 leading-none drop-shadow-2xl">{spellResult?.title}</h3>
-              </div>
-              <button onClick={saveSpell} className="bg-red-950 text-white font-display px-16 py-8 rounded-sm text-xl shadow-2xl hover:bg-red-900 transition-all transform hover:scale-110 active:scale-95">SALVAR</button>
+            <div className="mt-20 border-t-4 border-zinc-400/20 pt-10 text-center w-full">
+              <span className="font-bold block text-xl not-italic uppercase tracking-[0.5em] opacity-80 mb-6">NOME EM PORTUGUÊS</span>
+              <h3 className="text-8xl font-power tracking-tighter text-red-950 leading-none drop-shadow-2xl uppercase break-words px-4">
+                {spellResult?.title}
+              </h3>
             </div>
           </motion.div>
         </section>
