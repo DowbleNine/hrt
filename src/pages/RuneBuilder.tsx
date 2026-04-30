@@ -127,32 +127,39 @@ const RuneBuilder: React.FC = () => {
             <h2 className="mapa-title text-[#1a1a1a]">MAPA DE RUNAS</h2>
 
             <div className="ritual-triangle">
-              {/* HEAVY STRUCTURAL TRIANGLE */}
-              <svg className="absolute inset-0 w-full h-full -z-10" viewBox="0 0 100 100">
-                {/* Thick Stone-like Triangle */}
+              {/* HEAVY STRUCTURAL TRIANGLE - FIXED ALIGNMENT & VISIBILITY */}
+              <svg className="absolute inset-0 w-full h-full z-10" viewBox="0 0 500 450">
+                <defs>
+                  <filter id="shadow">
+                    <feDropShadow dx="0" dy="4" stdDeviation="3" floodOpacity="0.5"/>
+                  </filter>
+                </defs>
+                
+                {/* Structural Thick Line Path */}
                 <path 
-                  d="M 50 15 L 85 85 L 15 85 Z" 
+                  d="M 250 55 L 445 395 L 55 395 Z" 
                   fill="none" 
                   stroke="#3d2b1f" 
-                  strokeWidth="6" 
+                  strokeWidth="12" 
                   strokeLinejoin="round"
-                  style={{ filter: 'drop-shadow(0 4px 2px rgba(0,0,0,0.4))' }}
+                  filter="url(#shadow)"
                 />
-                <path d="M 50 15 L 85 85 L 15 85 Z" fill="none" stroke="#5d4332" strokeWidth="2" strokeLinejoin="round" />
+                <path d="M 250 55 L 445 395 L 55 395 Z" fill="none" stroke="#5d4332" strokeWidth="4" strokeLinejoin="round" />
                 
-                {/* Inner Glow Lines */}
+                {/* Inner Energy Line */}
                 <motion.path 
-                  d="M 50 15 L 85 85 L 15 85 Z" 
+                  d="M 250 55 L 445 395 L 55 395 Z" 
                   fill="none" 
                   stroke={auraColor} 
-                  strokeWidth="0.5" 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.3 }}
+                  strokeWidth="1" 
+                  strokeLinejoin="round"
+                  animate={{ opacity: [0.2, 0.6, 0.2] }}
+                  transition={{ repeat: Infinity, duration: 3 }}
                 />
               </svg>
 
-              {/* RUNE SLOTS WITH FRAMES */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 flex items-center gap-6">
+              {/* RUNE SLOTS WITH FRAMES - Increased z-index to stay on top */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 flex items-center gap-8 z-20">
                 <div className="mapa-slot-frame" style={{ borderColor: auraColor }}>
                   <img src={selectedCore?.image} className="w-4/5 h-4/5 object-contain" />
                 </div>
@@ -162,23 +169,23 @@ const RuneBuilder: React.FC = () => {
                 </div>
               </div>
 
-              <div className="absolute bottom-0 left-0 flex flex-col items-center">
+              <div className="absolute bottom-0 left-0 flex flex-col items-center z-20">
                 <div className="mapa-slot-frame">
                   {selectedVector && <img src={selectedVector.image} className="w-4/5 h-4/5 object-contain" />}
                 </div>
                 <div className="mt-4 text-center">
                   <div className="mapa-slot-label">RUNA DE VETOR {selectedVector?.action.toUpperCase()}:</div>
-                  <div className="mapa-slot-desc max-w-[150px]">{selectedVector?.description}</div>
+                  <div className="mapa-slot-desc max-w-[140px]">{selectedVector?.description}</div>
                 </div>
               </div>
 
-              <div className="absolute bottom-0 right-0 flex flex-col items-center">
+              <div className="absolute bottom-0 right-0 flex flex-col items-center z-20">
                 <div className="mapa-slot-frame">
                   {selectedModulator && <img src={selectedModulator.image || '/stone-texture.png'} className="w-4/5 h-4/5 object-contain" />}
                 </div>
                 <div className="mt-4 text-center">
                   <div className="mapa-slot-label">RUNA MODULADORA:</div>
-                  <div className="mapa-slot-desc max-w-[150px]">{selectedModulator?.description}</div>
+                  <div className="mapa-slot-desc max-w-[140px]">{selectedModulator?.description}</div>
                 </div>
               </div>
             </div>
