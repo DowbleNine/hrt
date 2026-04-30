@@ -167,9 +167,9 @@ export const RUNE_DATA = {
     },
     trajectum: {
       id: "trajectum",
-      name: "Trajectum",
+      name: "Trajeto",
       action: "Guia",
-      description: "Teleguiado pelo instinto.",
+      description: "Teleguiado pelo instinto arcano.",
       path: "M -10 10 L 0 0 L 10 10 M 0 0 L 0 20",
       attachTo: "top"
     }
@@ -177,9 +177,9 @@ export const RUNE_DATA = {
   modulators: {
     magnus: {
       id: "magnus",
-      name: "Magnus",
+      name: "Magno",
       mod: "Potente",
-      description: "Aumenta o dano e impacto.",
+      description: "Amplifica drasticamente o impacto e a área.",
       path: "M -10 -10 L 10 10 M 10 -10 L -10 10",
       position: "right"
     },
@@ -209,17 +209,17 @@ export const RUNE_DATA = {
     },
     fixus: {
       id: "fixus",
-      name: "Fixus",
+      name: "Fixo",
       mod: "Estável",
-      description: "Aumenta a estabilidade e precisão.",
+      description: "Garantindo estabilidade e precisão absoluta.",
       path: "M -15 0 L 15 0",
       position: "left"
     },
     sincron: {
       id: "sincron",
-      name: "Sincron",
+      name: "Síncron",
       mod: "Síncrono",
-      description: "Sincroniza fluxos de energia.",
+      description: "Sincroniza fluxos de energia multidimensionais.",
       path: "M -10 -5 L 0 0 L -10 5 M 10 -5 L 0 0 L 10 5",
       position: "right"
     },
@@ -233,9 +233,9 @@ export const RUNE_DATA = {
     },
     gravis: {
       id: "gravis",
-      name: "Gravis",
+      name: "Grave",
       mod: "Pesado",
-      description: "Aumenta a massa e o impacto.",
+      description: "Aumenta a densidade e o impacto físico.",
       path: "M 0 -5 L 0 10 M -5 5 L 0 10 L 5 5",
       position: "right"
     }

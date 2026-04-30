@@ -1,7 +1,7 @@
 .rune-builder-page {
   min-height: 100vh;
   background-image: url('/wood.png');
-  background-size: 500px;
+  background-size: 600px;
   color: #2c1e14;
   font-family: 'MedievalSharp', cursive;
   display: flex;
@@ -9,281 +9,274 @@
 }
 
 .rb-header {
-  padding: 1rem 3rem;
+  padding: 1.5rem 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 6px double #4a3728;
   background: url('/parchment.png');
   background-size: cover;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-  position: sticky;
-  top: 0;
+  border-bottom: 8px solid #4a3728;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   z-index: 100;
 }
 
 .rb-logo h1 {
   font-family: 'Pirata One', cursive;
-  font-size: 3rem;
-  font-weight: 400;
-  letter-spacing: 3px;
+  font-size: 3.5rem;
   color: #3d2b1f;
   margin: 0;
   text-shadow: 2px 2px 0px #b8860b;
 }
 
-.rb-subtitle {
-  font-family: 'Cinzel', serif;
-  font-size: 0.8rem;
-  color: #8b5a2b;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  font-weight: 900;
+.rb-user-box input {
+  background: rgba(0,0,0,0.1);
+  border: 2px solid #4a3728;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-family: 'MedievalSharp', cursive;
+  color: #3d2b1f;
+  width: 300px;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.rb-main {
-  display: grid;
-  grid-template-columns: 380px 1fr 380px;
+.rb-ritual-area {
   flex: 1;
-  gap: 0;
-  background: rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 2rem;
+  gap: 3rem;
+  background: rgba(0,0,0,0.4);
 }
 
-.rb-panel {
-  background: url('/parchment.png');
-  background-size: cover;
-  padding: 2rem;
-  overflow-y: auto;
-  max-height: calc(100vh - 80px);
-  border: 10px solid transparent;
-  border-image: url('/viking-border.png') 30 round;
-  box-shadow: inset 0 0 100px rgba(0,0,0,0.2);
+/* TRIAD SLOTS */
+.ritual-triad {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  width: 100%;
+  max-width: 1200px;
 }
 
-.rb-panel h2 {
+.ritual-slot-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 250px;
+}
+
+.slot-label {
   font-family: 'Pirata One', cursive;
   font-size: 1.8rem;
-  letter-spacing: 1px;
-  color: #3d2b1f;
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
-  border-bottom: 3px solid #8b5a2b;
-  display: block;
+  color: #b8860b;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  letter-spacing: 2px;
+}
+
+.ritual-slot {
+  width: 180px;
+  height: 180px;
+  background: rgba(0,0,0,0.3);
+  border: 15px solid transparent;
+  border-image: url('/viking-border.png') 100 round;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.7), inset 0 0 30px rgba(0,0,0,0.5);
+}
+
+.ritual-slot.filled {
+  transform: scale(1.1);
+  box-shadow: 0 0 50px rgba(184, 134, 11, 0.4);
+}
+
+.ritual-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: brightness(1.1) contrast(1.1);
+}
+
+.slot-placeholder {
+  font-size: 4rem;
+  color: #4a3728;
+  opacity: 0.5;
+}
+
+.slot-desc {
+  background: rgba(255, 228, 188, 0.15);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #8b5a2b;
+  font-size: 0.95rem;
+  text-align: center;
+  color: #f4e4bc;
+  line-height: 1.4;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CENTRAL SCROLL */
+.manifestation-scroll {
+  width: 100%;
+  max-width: 800px;
+  background: url('/parchment.png');
+  background-size: cover;
+  padding: 3rem 5rem;
+  border: 20px solid transparent;
+  border-image: url('/viking-border.png') 60 round;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.rb-grid {
+.spell-name-pt {
+  font-family: 'Pirata One', cursive;
+  font-size: 3.5rem;
+  margin: 0 0 1.5rem 0;
+  color: #3d2b1f;
+  border-bottom: 2px solid #8b5a2b;
+  width: 100%;
+}
+
+.power-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.power-indicator span {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  color: #8b5a2b;
+}
+
+.power-mini-bar {
+  height: 8px;
+  background: rgba(0,0,0,0.1);
+  border: 1px solid #4a3728;
+  width: 100%;
+}
+
+.power-mini-bar .fill {
+  height: 100%;
+  background: #b8860b;
+}
+
+.spell-manifestation {
+  font-family: 'Almendra', serif;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: #2c1e14;
+  font-style: italic;
+  margin-bottom: 2.5rem;
+}
+
+.syntax-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.btn-save-ritual {
+  margin-top: 2rem;
+  background: #3d2b1f;
+  color: #f4e4bc;
+  border: 3px solid #b8860b;
+  padding: 1rem 4rem;
+  font-family: 'Pirata One', cursive;
+  font-size: 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.btn-save-ritual:hover {
+  background: #4a3728;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+}
+
+/* SELECTION GRIDS */
+.selection-grids-container {
+  display: flex;
+  gap: 4rem;
+  width: 100%;
+  max-width: 1400px;
+  justify-content: center;
+}
+
+.grid-section {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.grid-section h3 {
+  font-family: 'Pirata One', cursive;
+  font-size: 1.8rem;
+  color: #f4e4bc;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.ritual-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
-.rb-item {
+.grid-item {
   background: url('/stone-texture.png');
   background-size: cover;
   border: 2px solid #2c1e14;
-  border-radius: 15px; /* Rounded like stones in Image 1 */
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.4);
-}
-
-.rb-item:hover {
-  transform: translateY(-5px) rotate(2deg);
-  border-color: #b8860b;
-  filter: brightness(1.2);
-}
-
-.rb-item.active {
-  border-color: #ffd700;
-  box-shadow: 0 0 30px rgba(184, 134, 11, 0.6), inset 0 0 30px rgba(255,215,0,0.2);
-  transform: scale(1.1) rotate(-1deg);
-}
-
-.rb-item-icon {
-  width: 65px;
-  height: 65px;
-  margin-bottom: 0.5rem;
-  filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.7));
-  background-position: center;
-  background-repeat: no-repeat;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.rb-item-icon svg {
-  width: 100%;
-  height: 100%;
-  fill: none;
-  stroke: #2c1e14;
-  stroke-width: 4;
-}
-
-.rb-item.active .rb-item-icon svg {
-  stroke: #4a3728;
-  filter: drop-shadow(0 0 10px rgba(184, 134, 11, 0.8));
-}
-
-.rb-item-name {
-  font-family: 'MedievalSharp', cursive;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #2c1e14;
-  text-shadow: 0.5px 0.5px 0px rgba(255,255,255,0.3);
-}
-
-.rb-workspace {
-  background: url('/parchment.png');
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  border: 40px solid transparent;
-  border-image: url('/viking-border.png') 100 round;
-}
-
-.rb-canvas-container {
-  width: 550px;
-  height: 550px;
-  position: relative;
-  filter: contrast(1.1) sepia(0.2);
-}
-
-#rb-svg {
-  width: 100%;
-  height: 100%;
-}
-
-.rb-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 450px;
-  height: 450px;
-  background: radial-gradient(circle, rgba(184, 134, 11, 0.15) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.rb-action-bar {
-  margin-top: 2rem;
-  display: flex;
-  gap: 2rem;
-}
-
-.btn-conjurar {
-  background: url('/stone-texture.png');
-  background-size: cover;
-  color: #f4e4bc;
-  border: 3px solid #4a3728;
-  padding: 1.2rem 4rem;
-  font-family: 'Pirata One', cursive;
-  font-size: 1.8rem;
-  letter-spacing: 2px;
   border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  transition: all 0.3s;
-  text-shadow: 2px 2px 4px #000;
-}
-
-.btn-conjurar:hover {
-  transform: translateY(-3px) scale(1.05);
-  filter: brightness(1.1);
-  border-color: #b8860b;
-}
-
-.rb-card {
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid #4a3728;
-  border-radius: 4px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.rb-card h3 {
-  font-family: 'Cinzel', serif;
-  font-size: 1rem;
-  color: #3d2b1f;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  font-weight: 900;
-  border-bottom: 1px solid #8b5a2b;
-  padding-bottom: 5px;
-}
-
-.rb-spell-name {
-  font-family: 'Pirata One', cursive;
-  font-size: 2.2rem;
-  font-weight: 400;
-  margin-bottom: 1rem;
-  color: #2c1e14;
-}
-
-.rb-power-meter {
+  padding: 0.8rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.5);
 }
 
-.rb-power-bar {
-  flex: 1;
-  height: 12px;
-  background: rgba(0, 0, 0, 0.15);
-  border: 1px solid #4a3728;
-  border-radius: 6px;
-  overflow: hidden;
+.grid-item:hover {
+  filter: brightness(1.2);
+  transform: translateY(-3px);
 }
 
-.rb-power-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #8b5a2b, #b8860b);
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+.grid-item.active {
+  border-color: #ffd700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
 }
 
-.manifest-content {
-  font-family: 'Almendra', serif;
-  font-size: 1.2rem;
-  line-height: 1.5;
+.grid-item img {
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.grid-item span {
+  font-size: 0.85rem;
   color: #2c1e14;
-  font-style: italic;
-  padding: 10px;
-}
-
-/* Specific SVG path styles for the Viking theme */
-.path-core { 
-  stroke: #2c1e14; 
-  fill: none; 
-  stroke-linecap: round; 
-  stroke-linejoin: round; 
-  filter: drop-shadow(1px 1px 1px rgba(255,255,255,0.5));
-}
-
-.path-vector { 
-  stroke: #8b5a2b; 
-  fill: none; 
-  stroke-linecap: round; 
-  stroke-linejoin: round;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: draw-vector 2s forwards;
-}
-
-@keyframes draw-vector {
-  to { stroke-dashoffset: 0; }
-}
-
-.path-modulator { 
-  stroke: #4a3728; 
-  fill: none; 
-  stroke-width: 3; 
-  opacity: 0.9; 
+  font-weight: bold;
 }
