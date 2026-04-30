@@ -44,36 +44,49 @@ export interface SpellResult {
 }
 
 export const getSpellResult = (core: Rune, vector: Rune, modulator: Rune): SpellResult => {
-  const titles: Record<string, string> = {
-    // Cores
-    pyros: 'ÍGNEO', hydros: 'AQUÁTICO', aethel: 'ETÉREO', geos: 'TELÚRICO',
-    haemus: 'VITAL', fulgor: 'ELÉTRICO', skotos: 'ABISSAL', kinesis: 'GRAVITACIONAL',
-    // Vetores
-    impetus: 'DE PROJEÇÃO', sphera: 'DE EXPANSÃO', murus: 'DE RETENÇÃO',
-    axis: 'DE COMPRESSÃO', vertex: 'DE VÓRTICE', trajectum: 'DE GUIA',
-    // Moduladores
-    magnus: 'MASSIVO', velox: 'ACELERADO', aeterna: 'ETERNO',
-    fixus: 'ESTÁVEL', sincron: 'CONVERGENTE', levitas: 'LEVE',
-    gravis: 'PESADO', fragilis: 'DISRUPTIVO'
+  const dictionary: Record<string, { adj: string; action: string; effect: string; desc: string }> = {
+    // NUCLEOS
+    pyros: { adj: 'Ígneo', action: 'Incinera', effect: 'Combustão', desc: 'chamas de alta temperatura' },
+    hydros: { adj: 'Glacial', action: 'Purifica', effect: 'Congelamento', desc: 'água sob alta pressão' },
+    aethel: { adj: 'Celeste', action: 'Corta', effect: 'Vácuo', desc: 'correntes de ar cortantes' },
+    geos: { adj: 'Telúrico', action: 'Esmaga', effect: 'Solidificação', desc: 'massa mineral densa' },
+    haemus: { adj: 'Escarlate', action: 'Drena', effect: 'Sacrifício', desc: 'energia vital pulsante' },
+    fulgor: { adj: 'Galvânico', action: 'Eletrocuta', effect: 'Choque', desc: 'descargas de plasma elétrico' },
+    skotos: { adj: 'Umbral', action: 'Oculta', effect: 'Vazio', desc: 'matéria negra abissal' },
+    kinesis: { adj: 'Cósmico', action: 'Atrai', effect: 'Colapso', desc: 'campos de distorção gravitacional' },
+    
+    // VETORES
+    impetus: { adj: 'Lança', action: 'Projeta', effect: 'Direcionado', desc: 'em um feixe linear de longo alcance' },
+    sphera: { adj: 'Aura', action: 'Expande', effect: 'Omnidirecional', desc: 'em uma onda de impacto circular' },
+    murus: { adj: 'Bastião', action: 'Ergue', effect: 'Defensivo', desc: 'como uma estrutura sólida e impenetrável' },
+    axis: { adj: 'Singularidade', action: 'Colapsa', effect: 'Implosivo', desc: 'para um ponto central de alta densidade' },
+    vertex: { adj: 'Ciclone', action: 'Gira', effect: 'Espiral', desc: 'em um vórtice furioso e turbulento' },
+    trajectum: { adj: 'Seta', action: 'Persegue', effect: 'Guiado', desc: 'em uma trajetória inteligente até o alvo' },
+
+    // MODULADORES
+    magnus: { adj: 'Soberano', action: 'Amplifica', effect: 'Massivo', desc: 'com potência titânica e devastadora' },
+    velox: { adj: 'Fugaz', action: 'Acelera', effect: 'Instantâneo', desc: 'com velocidade de execução relâmpago' },
+    aeterna: { adj: 'Perpétuo', action: 'Mantém', effect: 'Eterno', desc: 'com duração prolongada e persistente' },
+    fixus: { adj: 'Inabalável', action: 'Estabiliza', effect: 'Rígido', desc: 'com coesão inquebrável' },
+    sincron: { adj: 'Harmônico', action: 'Sincroniza', effect: 'Ressonante', desc: 'em perfeita convergência rítmica' },
+    levitas: { adj: 'Grácil', action: 'Alivia', effect: 'Volátil', desc: 'com massa reduzida e leveza extrema' },
+    gravis: { adj: 'Monumental', action: 'Oprime', effect: 'Pesado', desc: 'com densidade esmagadora e opressiva' },
+    fragilis: { adj: 'Disruptivo', action: 'Rompe', effect: 'Penetrante', desc: 'focado na destruição total de defesas' }
   };
 
-  const actions: Record<string, string> = {
-    impetus: 'dispara um feixe', sphera: 'libera uma onda', murus: 'ergue um muro',
-    axis: 'colapsa um ponto', vertex: 'gera um ciclone', trajectum: 'lança um projétil'
-  };
+  const c = dictionary[core.id];
+  const v = dictionary[vector.id];
+  const m = dictionary[modulator.id];
 
-  const effects: Record<string, string> = {
-    magnus: 'devastador', velox: 'instantâneo', aeterna: 'contínuo',
-    fixus: 'impenetrável', sincron: 'harmonizado', levitas: 'flutuante',
-    gravis: 'esmagador', fragilis: 'perfurante'
-  };
+  // Naming Logic: [Refiner] [Core Adjective] [Vector Action]
+  // Example: Soberano Ciclone Ígneo
+  const title = `${m.adj} ${v.adj} ${c.adj}`.toUpperCase();
 
-  const coreName = core.name.toUpperCase();
-  const vectorAction = actions[vector.id];
-  const modEffect = effects[modulator.id];
+  // Description Logic: Combines technical and thematic elements
+  const powerDescription = `Esta manifestação rúnica ${v.action} ${c.desc} ${v.desc}. O efeito é refinado por uma modulação ${m.effect.toLowerCase()}, tornando-o ${m.desc}. Na prática, ${c.action.toLowerCase()} o alvo através de ${c.effect.toLowerCase()} ${m.action.toLowerCase()}da.`;
 
   return {
-    title: `${titles[modulator.id]} ${coreName} ${titles[vector.id]}`,
-    power: `Esta combinação ${vectorAction} de ${core.description.toLowerCase()} com um efeito ${modEffect}, resultando em uma manifestação mágica de alta complexidade.`
+    title,
+    power: powerDescription
   };
 };
