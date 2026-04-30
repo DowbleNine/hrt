@@ -49,8 +49,17 @@
   }
 
   .card {
-    @apply bg-dark-card border-2 border-slate-border rounded-sm parchment-bg;
+    background-color: var(--color-dark-card);
+    border: 2px solid var(--color-slate-border);
+    border-radius: 0.125rem;
     color: #2c1e14;
+  }
+  .card.parchment {
+    background-image: url('/parchment.png');
+    background-size: cover;
+    background-position: center;
+    border: 8px double #4a3728;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 50px rgba(0,0,0,0.1);
   }
 
   .btn-primary {

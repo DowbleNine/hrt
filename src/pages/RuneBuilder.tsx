@@ -92,9 +92,9 @@ const RuneBuilder: React.FC = () => {
 
   const getSyntaxLevel = () => {
     const score = (selectedCore ? 1 : 0) + (selectedVector ? 1 : 0) + selectedModulators.length;
-    if (score <= 2) return { level: "Simples", color: "#4ade80" };
-    if (score <= 4) return { level: "Composta", color: "#fbbf24" };
-    return { level: "Complexa", color: "#f87171" };
+    if (score <= 2) return { level: "Simples", color: "#2d5a27" }; // Darker green
+    if (score <= 4) return { level: "Composta", color: "#8b5a2b" }; // Brown/Gold
+    return { level: "Complexa", color: "#7c2214" }; // Dark red
   };
 
   return (

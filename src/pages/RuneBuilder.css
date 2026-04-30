@@ -3,42 +3,42 @@
   background-image: url('/wood.png');
   background-size: 500px;
   color: #2c1e14;
-  font-family: 'Almendra', serif;
+  font-family: 'MedievalSharp', cursive;
   display: flex;
   flex-direction: column;
 }
 
 .rb-header {
-  padding: 1.5rem 3rem;
+  padding: 1rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 4px double #4a3728;
+  border-bottom: 6px double #4a3728;
   background: url('/parchment.png');
   background-size: cover;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
 .rb-logo h1 {
-  font-family: 'Cinzel', serif;
-  font-size: 2.2rem;
-  font-weight: 900;
-  letter-spacing: 2px;
-  color: #4a3728;
+  font-family: 'Pirata One', cursive;
+  font-size: 3rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+  color: #3d2b1f;
   margin: 0;
-  text-shadow: 1px 1px 0px #b8860b;
+  text-shadow: 2px 2px 0px #b8860b;
 }
 
 .rb-subtitle {
   font-family: 'Cinzel', serif;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #8b5a2b;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 900;
 }
 
 .rb-main {
@@ -46,115 +46,91 @@
   grid-template-columns: 380px 1fr 380px;
   flex: 1;
   gap: 0;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.3);
 }
 
 .rb-panel {
   background: url('/parchment.png');
   background-size: cover;
-  padding: 2.5rem;
+  padding: 2rem;
   overflow-y: auto;
   max-height: calc(100vh - 80px);
-  border-right: 2px solid #4a3728;
-  border-left: 2px solid #4a3728;
-  box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
-}
-
-.rb-panel:last-child {
-  border-left: 2px solid #4a3728;
-  border-right: none;
+  border: 10px solid transparent;
+  border-image: url('/viking-border.png') 30 round;
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.2);
 }
 
 .rb-panel h2 {
-  font-family: 'Cinzel', serif;
-  font-size: 1.1rem;
-  letter-spacing: 2px;
-  color: #4a3728;
-  margin-bottom: 2rem;
+  font-family: 'Pirata One', cursive;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  color: #3d2b1f;
+  margin-bottom: 1.5rem;
   text-transform: uppercase;
-  border-bottom: 2px solid #b8860b;
-  display: inline-block;
-  padding-bottom: 5px;
+  border-bottom: 3px solid #8b5a2b;
+  display: block;
+  text-align: center;
 }
 
 .rb-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .rb-item {
-  background: url('/wood.png');
-  background-size: 200px;
-  border: 3px solid #4a3728;
-  border-radius: 8px;
-  padding: 1.2rem;
+  background: url('/stone-texture.png');
+  background-size: cover;
+  border: 2px solid #2c1e14;
+  border-radius: 15px; /* Rounded like stones in Image 1 */
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3), inset 0 0 10px rgba(0,0,0,0.5);
-}
-
-.rb-item::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.2);
-  opacity: 0.5;
-  pointer-events: none;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.4);
 }
 
 .rb-item:hover {
-  transform: translateY(-3px) scale(1.02);
+  transform: translateY(-5px) rotate(2deg);
   border-color: #b8860b;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.4), inset 0 0 15px rgba(0,0,0,0.6);
+  filter: brightness(1.2);
 }
 
 .rb-item.active {
-  border-color: #b8860b;
-  box-shadow: 0 0 20px rgba(184, 134, 11, 0.4), inset 0 0 20px rgba(0,0,0,0.7);
-  transform: scale(1.05);
-}
-
-.rb-item.active::after {
-  content: '✨';
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  font-size: 1.2rem;
+  border-color: #ffd700;
+  box-shadow: 0 0 30px rgba(184, 134, 11, 0.6), inset 0 0 30px rgba(255,215,0,0.2);
+  transform: scale(1.1) rotate(-1deg);
 }
 
 .rb-item-icon {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 0.8rem;
-  z-index: 1;
+  width: 55px;
+  height: 55px;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.7));
 }
 
 .rb-item-icon svg {
   width: 100%;
   height: 100%;
   fill: none;
-  stroke: #f4e4bc; /* Parchment color for contrast on wood */
-  stroke-width: 3;
-  filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.8));
+  stroke: #2c1e14;
+  stroke-width: 4;
 }
 
 .rb-item.active .rb-item-icon svg {
-  stroke: #b8860b;
-  filter: drop-shadow(0 0 8px #b8860b);
+  stroke: #4a3728;
+  filter: drop-shadow(0 0 10px rgba(184, 134, 11, 0.8));
 }
 
 .rb-item-name {
-  font-family: 'Cinzel', serif;
-  font-size: 0.85rem;
+  font-family: 'MedievalSharp', cursive;
+  font-size: 0.9rem;
   font-weight: 700;
-  color: #f4e4bc;
-  z-index: 1;
-  text-shadow: 1px 1px 2px #000;
+  color: #2c1e14;
+  text-shadow: 0.5px 0.5px 0px rgba(255,255,255,0.3);
 }
 
 .rb-workspace {
@@ -165,20 +141,20 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  box-shadow: inset 0 0 100px rgba(0,0,0,0.1);
+  border: 40px solid transparent;
+  border-image: url('/viking-border.png') 100 round;
 }
 
 .rb-canvas-container {
   width: 550px;
   height: 550px;
   position: relative;
-  filter: sepia(0.3);
+  filter: contrast(1.1) sepia(0.2);
 }
 
 #rb-svg {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
 }
 
 .rb-glow {
@@ -186,74 +162,66 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(184, 134, 11, 0.1) 0%, transparent 70%);
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(184, 134, 11, 0.15) 0%, transparent 70%);
   pointer-events: none;
-  z-index: 0;
 }
 
 .rb-action-bar {
-  margin-top: 3rem;
+  margin-top: 2rem;
   display: flex;
   gap: 2rem;
 }
 
 .btn-conjurar {
-  background: #4a3728;
+  background: url('/stone-texture.png');
+  background-size: cover;
   color: #f4e4bc;
-  border: 2px solid #b8860b;
+  border: 3px solid #4a3728;
   padding: 1.2rem 4rem;
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  letter-spacing: 3px;
-  border-radius: 4px;
+  font-family: 'Pirata One', cursive;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   transition: all 0.3s;
+  text-shadow: 2px 2px 4px #000;
 }
 
 .btn-conjurar:hover {
-  transform: translateY(-2px);
-  background: #5d4633;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+  transform: translateY(-3px) scale(1.05);
+  filter: brightness(1.1);
+  border-color: #b8860b;
 }
 
 .rb-card {
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(255, 255, 255, 0.1);
   border: 2px solid #4a3728;
   border-radius: 4px;
-  padding: 1.8rem;
-  margin-bottom: 2rem;
-  position: relative;
-}
-
-.rb-card::before {
-  content: '';
-  position: absolute;
-  top: 2px; left: 2px; right: 2px; bottom: 2px;
-  border: 1px solid #b8860b;
-  opacity: 0.2;
-  pointer-events: none;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .rb-card h3 {
   font-family: 'Cinzel', serif;
-  font-size: 0.9rem;
-  color: #8b5a2b;
-  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  color: #3d2b1f;
+  margin-bottom: 1rem;
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 900;
+  border-bottom: 1px solid #8b5a2b;
+  padding-bottom: 5px;
 }
 
 .rb-spell-name {
-  font-family: 'Cinzel', serif;
-  font-size: 1.8rem;
-  font-weight: 900;
-  margin-bottom: 1.5rem;
-  color: #4a3728;
-  border-bottom: 1px solid #b8860b;
-  padding-bottom: 10px;
+  font-family: 'Pirata One', cursive;
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: #2c1e14;
 }
 
 .rb-power-meter {
@@ -264,32 +232,55 @@
 
 .rb-power-bar {
   flex: 1;
-  height: 10px;
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 0;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.15);
   border: 1px solid #4a3728;
+  border-radius: 6px;
   overflow: hidden;
 }
 
 .rb-power-fill {
   height: 100%;
-  background: #b8860b;
-  box-shadow: none;
-  transition: width 0.5s ease;
+  background: linear-gradient(90deg, #8b5a2b, #b8860b);
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-/* Custom SVG colors for parchment theme */
-.path-core { stroke: #2c1e14; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-.path-vector { stroke: #8b5a2b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-.path-modulator { stroke: #4a3728; fill: none; stroke-width: 2; opacity: 0.8; }
 
 .manifest-content {
   font-family: 'Almendra', serif;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #4a3728;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #2c1e14;
   font-style: italic;
-  background: rgba(255,255,255,0.2);
   padding: 10px;
-  border-radius: 4px;
+}
+
+/* Specific SVG path styles for the Viking theme */
+.path-core { 
+  stroke: #2c1e14; 
+  fill: none; 
+  stroke-linecap: round; 
+  stroke-linejoin: round; 
+  filter: drop-shadow(1px 1px 1px rgba(255,255,255,0.5));
+}
+
+.path-vector { 
+  stroke: #8b5a2b; 
+  fill: none; 
+  stroke-linecap: round; 
+  stroke-linejoin: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-vector 2s forwards;
+}
+
+@keyframes draw-vector {
+  to { stroke-dashoffset: 0; }
+}
+
+.path-modulator { 
+  stroke: #4a3728; 
+  fill: none; 
+  stroke-width: 3; 
+  opacity: 0.9; 
 }
