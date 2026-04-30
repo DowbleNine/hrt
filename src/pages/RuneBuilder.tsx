@@ -1,5 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Home, 
+  Globe, 
+  Youtube, 
+  Settings, 
+  Sparkles,
+  Book
+} from 'lucide-react';
 import { RUNE_DATA, CoreRune, VectorRune, ModulatorRune } from '../lib/runeData';
 import './RuneBuilder.css';
 
@@ -8,247 +16,348 @@ const RuneBuilder: React.FC = () => {
   const [selectedVector, setSelectedVector] = useState<VectorRune | null>(RUNE_DATA.vectors.impetus);
   const [selectedModulator, setSelectedModulator] = useState<ModulatorRune | null>(RUNE_DATA.modulators.magnus);
   
-  const [spellName, setSpellName] = useState('');
-  const [spellDesc, setSpellDesc] = useState('');
-  const [power, setPower] = useState(0);
+  const [userEmail, setUserEmail] = useState(localStorage.getItem('userEmail') || '');
+  const [isSaving, setIsSaving] = useState(false);
 
-  useEffect(() => {
-    if (!selectedCore) return;
+  const spellResult = useMemo(() => {
+    if (!selectedCore) return null;
 
-    const name = `${selectedCore.name}${selectedVector ? ' ' + selectedVector.name : ''}${selectedModulator ? ' ' + selectedModulator.name : ''}`;
-    setSpellName(name.toUpperCase());
+    const coreName = selectedCore.name.toUpperCase();
+    const vectorName = selectedVector ? selectedVector.name.toUpperCase() : '---';
+    const modName = selectedModulator ? selectedModulator.name.toUpperCase() : '---';
 
     const actions: Record<string, string> = {
-      "ÍMPETUS": `Rajada Elemental de Calor Expansivo`,
-      "SPHERA": `Liberação Esférica de Energia`,
-      "MURUS": `Manifestação de Barreira Sólida`,
-      "AXIS": `Lâmina de Corte Dimensional`,
-      "VERTEX": `Vórtice de Sucção Elemental`,
-      "TRAJETO": `Projeção Teleguiada de Fluxo`
+      "ÍMPETUS": `Rajada Elemental de Calor Expansivo. Causa dano focado com fluxo concentrado.`,
+      "SPHERA": `Liberação Esférica de Energia em 360 graus. Expulsa inimigos próximos.`,
+      "MURUS": `Manifestação de Barreira Sólida de ${selectedCore.element}. Protege contra investidas.`,
+      "AXIS": `Lâmina de Corte Dimensional carregada com ${selectedCore.element}.`,
+      "VERTEX": `Vórtice de Sucção Elemental que colapsa em si mesmo.`,
+      "TRAJETO": `Projeção Teleguiada que persegue a assinatura arcana do alvo.`
     };
 
-    setSpellDesc(selectedVector ? actions[selectedVector.name.toUpperCase()] || 'Manifestação Arcana' : 'Manifestação Arcana');
-    setPower(1 + (selectedVector ? 2 : 0) + (selectedModulator ? 1.5 : 0));
+    return {
+      title: `${coreName}${selectedVector ? ' ' + vectorName : ''}${selectedModulator ? ' ' + modName : ''}`,
+      power: selectedVector ? actions[vectorName] || 'Manifestação de energia pura.' : 'A essência bruta do elemento se manifesta.',
+      powerValue: (1 + (selectedVector ? 2 : 0) + (selectedModulator ? 1.5 : 0))
+    };
   }, [selectedCore, selectedVector, selectedModulator]);
 
-  const auraColor = selectedCore?.color || '#b8860b';
+  const saveSpell = async () => {
+    if (!selectedCore || !spellResult) return;
+    if (!userEmail) {
+      alert('Por favor, insira seu e-mail no Grimório para salvar.');
+      return;
+    }
+
+    setIsSaving(true);
+    try {
+      const response = await fetch('/api/runes/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_email: userEmail,
+          spell_name: spellResult.title,
+          core_id: selectedCore.id,
+          vector_id: selectedVector?.id,
+          modulator_ids: selectedModulator ? [selectedModulator.id] : [],
+          power: spellResult.powerValue
+        })
+      });
+
+      const result = await response.json();
+      if (result.status === 'success') {
+        alert('Magia salva no seu Grimório!');
+        localStorage.setItem('userEmail', userEmail);
+      } else {
+        alert('Erro: ' + result.message);
+      }
+    } catch (error) {
+      console.error('Erro ao salvar:', error);
+      alert('Erro de conexão com o Grande Códice.');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const auraColor = selectedCore?.color || '#c5a059';
 
   return (
-    <div className="rune-builder-page">
-      {/* FORGE HEADER */}
-      <header className="forge-header">
+    <div className="min-h-screen flex flex-col p-4 md:p-8 relative overflow-hidden bg-[#1a1a1a] text-zinc-300 antialiased">
+      {/* Ambient Lighting (Flicker) */}
+      <div className="absolute -top-20 -left-20 w-96 h-96 candle-light" />
+      <div className="absolute top-1/2 -right-40 w-[500px] h-[500px] candle-light" style={{ animationDelay: '1.5s' }} />
+      <div className="absolute -bottom-40 left-1/4 w-[600px] h-[600px] candle-light opacity-30" style={{ animationDelay: '3s' }} />
+
+      {/* Header replicated from model */}
+      <header className="flex justify-between items-center mb-8 border-b border-white/10 pb-4 relative z-10">
         <div className="flex items-center gap-4">
-          <button className="text-white opacity-50 hover:opacity-100">☰</button>
-          <button className="text-white opacity-50 hover:opacity-100">🏠</button>
-          <div className="forge-title">FORJA DE RUNAS - Grimório Arcano</div>
+          <button className="p-2 hover:bg-white/5 rounded-md transition-colors"><Home size={20} /></button>
+          <div className="h-4 w-[1px] bg-white/20" />
+          <h1 className="text-xl md:text-2xl text-arcane-gold font-display font-bold">
+            FORJA DE RUNAS <span className="text-zinc-500 font-normal ml-2">- Grimório Arcano</span>
+          </h1>
         </div>
-        <div className="header-icons">
-          <span>🌐</span>
-          <span>📺</span>
-          <span>🚪</span>
+        <div className="flex gap-4 items-center">
+          <input 
+            type="email" 
+            placeholder="Grimório de: seu@email.com" 
+            value={userEmail}
+            onChange={(e) => setUserEmail(e.target.value)}
+            className="bg-black/40 border border-zinc-700 px-3 py-1 rounded text-xs font-mono focus:border-arcane-gold outline-none w-48"
+          />
+          <Globe size={18} className="text-zinc-400 cursor-pointer hover:text-white transition-colors" />
+          <Youtube size={18} className="text-zinc-400 cursor-pointer hover:text-white transition-colors" />
+          <Settings size={18} className="text-zinc-400 cursor-pointer hover:text-white transition-colors" />
         </div>
       </header>
 
-      <div className="forge-container">
-        {/* LEFT: THE BOOK (GRIMORIO) */}
-        <section className="grimorio-section">
-          <h2 className="grimorio-title">RESULTADO DA COMBINAÇÃO</h2>
-          
-          <div className="magic-circle-container">
-            <div className="transmutation-circle"></div>
-            
-            <svg viewBox="0 0 100 100" className="w-full h-full absolute z-10">
-              <defs>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
-                  <feMerge>
-                    <feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-              </defs>
+      <main className="flex-1 flex flex-col lg:flex-row gap-8 overflow-hidden relative z-10">
+        
+        {/* Left Side: Grimoire Result (Parchment) */}
+        <section className="flex-1 lg:max-w-md xl:max-w-lg perspective-1000">
+          <motion.div 
+            initial={{ rotateY: -10, opacity: 0 }}
+            animate={{ rotateY: 0, opacity: 1 }}
+            className="parchment-texture w-full h-full p-8 md:p-12 relative rounded-sm text-zinc-900 flex flex-col justify-between magical-border"
+          >
+            {/* Wax Seal Decorations */}
+            <div className="absolute top-4 right-4 w-12 h-12 bg-red-800 rounded-full shadow-lg flex items-center justify-center -rotate-12 border-2 border-red-900 border-dashed">
+              <span className="text-white font-display text-[10px]">CÓDICE</span>
+            </div>
+            <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-red-800 rounded-full shadow-lg flex items-center justify-center rotate-12 border-2 border-red-900 border-dashed">
+              <div className="w-12 h-12 border border-red-400/30 rounded-full flex items-center justify-center">
+                <Sparkles size={24} className="text-white" />
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center text-center">
+              <h2 className="text-2xl font-display font-bold mb-8 border-b-2 border-zinc-400/30 pb-2 w-full">RESULTADO DA COMBINAÇÃO</h2>
               
-              <motion.path 
-                d="M 50 20 L 80 75 L 20 75 Z" 
-                fill="none" 
-                stroke={auraColor} 
-                strokeWidth="0.5"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                style={{ filter: 'url(#glow)' }}
-              />
+              {/* Magic Sigil Illustration */}
+              <div className="relative w-64 h-64 flex items-center justify-center mb-8">
+                <svg className="absolute w-full h-full text-arcane-gold/40" viewBox="0 0 100 100">
+                  <polygon points="50,10 90,90 10,90" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                  <circle cx="50" cy="63.3" r="30" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                  <circle cx="50" cy="63.3" r="35" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" />
+                  {/* Dynamic connection paths */}
+                  <motion.path 
+                    d="M 50 20 L 80 75 L 20 75 Z" 
+                    fill="none" 
+                    stroke={auraColor} 
+                    strokeWidth="1"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                  />
+                </svg>
 
-              <g transform="translate(50, 20)">
-                <circle r="8" fill="#1a1a1a" stroke={auraColor} strokeWidth="1" />
-                {selectedCore?.image && <image href={selectedCore.image} x="-6" y="-6" width="12" height="12" />}
-              </g>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={selectedCore?.id}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    className="z-10 bg-white/20 p-4 rounded-full backdrop-blur-sm border border-white/40 shadow-xl"
+                  >
+                    <img 
+                      src={selectedCore?.image} 
+                      alt={selectedCore?.name} 
+                      className="w-24 h-24 object-contain drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]"
+                    />
+                  </motion.div>
+                </AnimatePresence>
 
-              <g transform="translate(80, 75)">
-                <circle r="8" fill="#1a1a1a" stroke={selectedVector ? auraColor : '#333'} strokeWidth="1" />
-                {selectedVector?.image && <image href={selectedVector.image} x="-6" y="-6" width="12" height="12" />}
-              </g>
+                {/* Nodes nodes nodes */}
+                <div className="absolute top-0 flex flex-col items-center">
+                  <div className="w-10 h-10 bg-black/80 rounded-full flex items-center justify-center border border-arcane-gold/40 shadow-lg">
+                    <img src={selectedCore?.image} className="w-6 h-6 object-contain" />
+                  </div>
+                </div>
+                <div className="absolute bottom-4 left-4">
+                   <div className="w-10 h-10 bg-black/80 rounded-full flex items-center justify-center border border-arcane-gold/40 shadow-lg">
+                    {selectedVector && <img src={selectedVector.image} className="w-6 h-6 object-contain" />}
+                  </div>
+                </div>
+                <div className="absolute bottom-4 right-4">
+                  <div className="w-10 h-10 bg-black/80 rounded-full flex items-center justify-center border border-arcane-gold/40 shadow-lg">
+                    {selectedModulator && <img src={selectedModulator.image || '/stone-texture.png'} className="w-6 h-6 object-contain" />}
+                  </div>
+                </div>
+              </div>
 
-              <g transform="translate(20, 75)">
-                <circle r="8" fill="#1a1a1a" stroke={selectedModulator ? auraColor : '#333'} strokeWidth="1" />
-                {selectedModulator?.image && <image href={selectedModulator.image || '/stone-texture.png'} x="-6" y="-6" width="12" height="12" />}
-              </g>
+              <div className="w-full text-left font-sans italic text-sm space-y-4">
+                <div>
+                  <span className="font-bold block text-xs not-italic uppercase tracking-tighter opacity-70">Nomes das Runas:</span>
+                  <p className="uppercase font-bold text-zinc-900/80 leading-tight">
+                    {selectedCore?.name} | VETOR DE {selectedVector?.name || '---'} | MODULADOR DE {selectedModulator?.name || '---'}
+                  </p>
+                </div>
 
-              <motion.circle 
-                cx="50" cy="56" r="5" 
-                fill={auraColor} 
-                animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-                style={{ filter: 'url(#glow)' }}
-              />
-            </svg>
-          </div>
-
-          <div className="spell-info-book text-[#3d2b1f] w-full text-left space-y-4">
-            <div>
-              <div className="font-bold text-xs uppercase opacity-70">Nomes das Runas:</div>
-              <div className="font-serif text-lg">{selectedCore?.name} | {selectedVector?.name || '---'} | {selectedModulator?.name || '---'}</div>
+                <div>
+                  <span className="font-bold block text-xs not-italic uppercase tracking-tighter opacity-70">Poder Gerado:</span>
+                  <p className="text-zinc-800 leading-tight">{spellResult?.power}</p>
+                </div>
+              </div>
             </div>
-            <div>
-              <div className="font-bold text-xs uppercase opacity-70">Poder Gerado:</div>
-              <div className="font-serif text-lg">{spellDesc}</div>
+
+            <div className="mt-8 flex justify-between items-end">
+              <div>
+                <span className="font-bold block text-xs not-italic uppercase tracking-tighter opacity-70 mb-1">Nome em Português:</span>
+                <h3 className="text-2xl font-display font-bold tracking-tight text-red-900/90">{spellResult?.title}</h3>
+              </div>
+              <button 
+                onClick={saveSpell}
+                disabled={isSaving}
+                className="bg-red-900 text-white font-display px-4 py-2 rounded-sm shadow-lg hover:bg-red-800 transition-colors disabled:opacity-50 text-xs"
+              >
+                {isSaving ? 'INVOCANDO...' : 'SALVAR'}
+              </button>
             </div>
-            <div>
-              <div className="font-bold text-xs uppercase opacity-70">Nome em Português:</div>
-              <div className="font-serif text-xl font-bold tracking-tight">{spellName || '---'}</div>
-            </div>
-          </div>
+          </motion.div>
         </section>
 
-        {/* MIDDLE: THE MAP (PAPIRO) */}
-        <section className="mapa-section">
-          <div className="papiro-scroll">
-            <div className="candle top-[-40px] left-[-20px]"><div className="candle-flame"></div></div>
-            <div className="candle top-[-40px] right-[-20px]"><div className="candle-flame"></div></div>
+        {/* Center: Rune Map (Parchment on Slate) */}
+        <section className="flex-[1.5] flex flex-col">
+          <div className="bg-zinc-900/40 p-8 rounded-sm magical-border flex-1 flex flex-col items-center relative overflow-hidden">
+            <div className="absolute inset-0 opacity-10 pointer-events-none parchment-texture" />
+            <h2 className="text-xl font-display font-bold text-arcane-gold mb-12 relative z-10 tracking-[0.3em]">MAPA DE RUNAS</h2>
             
-            <h2 className="mapa-title text-[#1a1a1a]">MAPA DE RUNAS</h2>
-
-            <div className="ritual-triangle">
-              {/* HEAVY STRUCTURAL TRIANGLE - FIXED ALIGNMENT & VISIBILITY */}
-              <svg className="absolute inset-0 w-full h-full z-10" viewBox="0 0 500 450">
-                <defs>
-                  <filter id="shadow">
-                    <feDropShadow dx="0" dy="4" stdDeviation="3" floodOpacity="0.5"/>
-                  </filter>
-                </defs>
-                
-                {/* Structural Thick Line Path */}
-                <path 
-                  d="M 250 55 L 445 395 L 55 395 Z" 
-                  fill="none" 
-                  stroke="#3d2b1f" 
-                  strokeWidth="12" 
-                  strokeLinejoin="round"
-                  filter="url(#shadow)"
-                />
-                <path d="M 250 55 L 445 395 L 55 395 Z" fill="none" stroke="#5d4332" strokeWidth="4" strokeLinejoin="round" />
-                
-                {/* Inner Energy Line */}
-                <motion.path 
-                  d="M 250 55 L 445 395 L 55 395 Z" 
-                  fill="none" 
-                  stroke={auraColor} 
-                  strokeWidth="1" 
-                  strokeLinejoin="round"
-                  animate={{ opacity: [0.2, 0.6, 0.2] }}
-                  transition={{ repeat: Infinity, duration: 3 }}
-                />
+            <div className="relative w-full max-w-lg aspect-square flex items-center justify-center z-10">
+              {/* Structural SVG Triangle */}
+              <svg className="absolute w-full h-full text-arcane-gold/30" viewBox="0 0 100 100">
+                <path d="M 50 15 L 85 85 L 15 85 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                <path d="M 50 15 L 15 85 M 50 15 L 85 85 M 15 85 L 85 85" stroke="currentColor" strokeWidth="0.2" strokeDasharray="1 1" />
               </svg>
 
-              {/* RUNE SLOTS WITH FRAMES - Increased z-index to stay on top */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 flex items-center gap-8 z-20">
-                <div className="mapa-slot-frame" style={{ borderColor: auraColor }}>
-                  <img src={selectedCore?.image} className="w-4/5 h-4/5 object-contain" />
-                </div>
-                <div className="text-left max-w-[200px]">
-                  <div className="mapa-slot-label">RUNA DE {selectedCore?.element.toUpperCase()}:</div>
-                  <div className="mapa-slot-desc">{selectedCore?.description}</div>
+              {/* Slot Core (Top) */}
+              <div className="absolute top-0 flex flex-col items-center gap-3 w-48 text-center">
+                <RuneSlot rune={selectedCore} color={auraColor} />
+                <div className="space-y-1">
+                  <span className="text-xs font-display text-arcane-gold uppercase tracking-widest">Runa de {selectedCore?.name}:</span>
+                  <p className="text-[10px] text-zinc-400 px-4 leading-tight">{selectedCore?.description}</p>
                 </div>
               </div>
 
-              <div className="absolute bottom-0 left-0 flex flex-col items-center z-20">
-                <div className="mapa-slot-frame">
-                  {selectedVector && <img src={selectedVector.image} className="w-4/5 h-4/5 object-contain" />}
-                </div>
-                <div className="mt-4 text-center">
-                  <div className="mapa-slot-label">RUNA DE VETOR {selectedVector?.action.toUpperCase()}:</div>
-                  <div className="mapa-slot-desc max-w-[140px]">{selectedVector?.description}</div>
+              {/* Slot Vector (Bottom Left) */}
+              <div className="absolute bottom-8 left-0 flex flex-col items-center gap-3 w-48 text-center">
+                 <RuneSlot rune={selectedVector} color="#c5a059" />
+                <div className="space-y-1">
+                  <span className="text-xs font-display text-arcane-gold uppercase tracking-widest">Vetor de {selectedVector?.name}:</span>
+                  <p className="text-[10px] text-zinc-400 px-4 leading-tight">{selectedVector?.description}</p>
                 </div>
               </div>
 
-              <div className="absolute bottom-0 right-0 flex flex-col items-center z-20">
-                <div className="mapa-slot-frame">
-                  {selectedModulator && <img src={selectedModulator.image || '/stone-texture.png'} className="w-4/5 h-4/5 object-contain" />}
-                </div>
-                <div className="mt-4 text-center">
-                  <div className="mapa-slot-label">RUNA MODULADORA:</div>
-                  <div className="mapa-slot-desc max-w-[140px]">{selectedModulator?.description}</div>
+              {/* Slot Modulator (Bottom Right) */}
+              <div className="absolute bottom-8 right-0 flex flex-col items-center gap-3 w-48 text-center">
+                <RuneSlot rune={selectedModulator} color="#c5a059" />
+                <div className="space-y-1">
+                  <span className="text-xs font-display text-arcane-gold uppercase tracking-widest">Runa Moduladora:</span>
+                  <p className="text-[10px] text-zinc-400 px-4 leading-tight">{selectedModulator?.description}</p>
                 </div>
               </div>
             </div>
-
-            <div className="candle bottom-[-40px] left-1/2 -translate-x-1/2"><div className="candle-flame"></div></div>
           </div>
         </section>
 
-        {/* RIGHT: THE LIBRARY (STONE) */}
-        <section className="biblioteca-section">
-          <h2 className="biblioteca-title">BIBLIOTECA DE PEDRAS RÚNICAS</h2>
+        {/* Right Side: Library Sidebar (Dark Slate) */}
+        <section className="w-full lg:w-80 flex flex-col gap-4">
+          <div className="bg-zinc-950 border-l-4 border-r-4 border-zinc-900 p-6 flex-1 rounded-sm flex flex-col gap-6 shadow-2xl relative overflow-hidden">
+            <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'url(https://www.transparenttextures.com/patterns/black-linen.png)' }} />
 
-          <div className="shelf-group">
-            <h3 className="shelf-title">Núcleos</h3>
-            <div className="shelf-grid">
-              {Object.values(RUNE_DATA.cores).map(core => (
-                <div 
-                  key={core.id} 
-                  className={`stone-item ${selectedCore?.id === core.id ? 'active' : ''}`}
-                  onClick={() => setSelectedCore(core)}
-                >
-                  <img src={core.image} alt={core.name} />
-                  <span className="stone-label">{core.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+            <h2 className="text-center text-xs font-display font-bold text-zinc-500 border-b border-zinc-800 pb-4 mb-2 tracking-[0.2em] relative z-10">
+              BIBLIOTECA DE PEDRAS RÚNICAS
+            </h2>
 
-          <div className="shelf-group">
-            <h3 className="shelf-title">Vetores</h3>
-            <div className="shelf-grid">
-              {Object.values(RUNE_DATA.vectors).map(vector => (
-                <div 
-                  key={vector.id} 
-                  className={`stone-item ${selectedVector?.id === vector.id ? 'active' : ''}`}
-                  onClick={() => setSelectedVector(vector)}
-                >
-                  <img src={vector.image} alt={vector.name} />
-                  <span className="stone-label">{vector.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+            <LibrarySection 
+              title="NÚCLEOS" 
+              items={Object.values(RUNE_DATA.cores)} 
+              selected={selectedCore}
+              onSelect={setSelectedCore}
+            />
 
-          <div className="shelf-group">
-            <h3 className="shelf-title">Moduladores</h3>
-            <div className="shelf-grid">
-              {Object.values(RUNE_DATA.modulators).map(mod => (
-                <div 
-                  key={mod.id} 
-                  className={`stone-item ${selectedModulator?.id === mod.id ? 'active' : ''}`}
-                  onClick={() => setSelectedModulator(mod)}
-                >
-                  <img src={mod.image || '/stone-texture.png'} alt={mod.name} />
-                  <span className="stone-label">{mod.name}</span>
-                </div>
-              ))}
-            </div>
+            <LibrarySection 
+              title="VETORES" 
+              items={Object.values(RUNE_DATA.vectors)} 
+              selected={selectedVector}
+              onSelect={setSelectedVector}
+            />
+
+            <LibrarySection 
+              title="MODULADORES" 
+              items={Object.values(RUNE_DATA.modulators)} 
+              selected={selectedModulator}
+              onSelect={setSelectedModulator}
+            />
           </div>
         </section>
-      </div>
+      </main>
+
+      <footer className="mt-8 text-center text-zinc-600 text-[10px] uppercase tracking-widest flex items-center justify-center gap-4 relative z-10">
+        <span>Fragmentos de Éter: 1024</span>
+        <div className="h-1 w-1 bg-zinc-700 rounded-full" />
+        <span>Magia Estável</span>
+        <div className="h-1 w-1 bg-zinc-700 rounded-full" />
+        <span>Sincronia Arcanista: 100%</span>
+      </footer>
     </div>
   );
 };
+
+// --- Sub-components (Exact replicate of model structure) ---
+
+function RuneSlot({ rune, color }: { rune: any; color: string }) {
+  return (
+    <div className="relative w-24 h-24 flex items-center justify-center">
+      <svg className="absolute w-full h-full text-arcane-gold scale-125" viewBox="0 0 100 100">
+        <path d="M50 5 L95 50 L50 95 L5 50 Z" fill="rgba(0,0,0,0.6)" stroke="currentColor" strokeWidth="1" />
+        <path d="M50 12 L88 50 L50 88 L12 50 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
+      </svg>
+      <motion.div
+        key={rune?.id}
+        initial={{ scale: 0.5, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        className="relative z-10 p-2"
+      >
+        <img 
+          src={rune?.image || '/stone-texture.png'} 
+          alt={rune?.name} 
+          className="w-16 h-16 object-contain drop-shadow-[0_0_8px_rgba(197,160,89,0.5)]" 
+        />
+      </motion.div>
+    </div>
+  );
+}
+
+function LibrarySection({ title, items, selected, onSelect }: { title: string; items: any[]; selected: any; onSelect: any }) {
+  return (
+    <div className="space-y-4 relative z-10">
+      <div className="flex items-center gap-2">
+        <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
+        <h3 className="text-[9px] font-display font-bold text-zinc-600 tracking-widest">{title}</h3>
+        <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
+      </div>
+      <div className="grid grid-cols-4 gap-2">
+        {items.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => onSelect(item)}
+            className={`
+              relative aspect-square flex flex-col items-center justify-center p-2 rounded border
+              transition-all group
+              ${selected?.id === item.id 
+                ? 'bg-zinc-900 border-arcane-gold shadow-[0_0_10px_rgba(197,160,89,0.2)]' 
+                : 'bg-black border-zinc-800 hover:border-zinc-700'}
+            `}
+          >
+            <img 
+              src={item.image || '/stone-texture.png'} 
+              className={`w-8 h-8 object-contain transition-transform duration-300 group-hover:scale-110 ${selected?.id === item.id ? '' : 'grayscale opacity-50'}`} 
+            />
+            <span className="text-[7px] mt-1 font-display opacity-40 group-hover:opacity-100 uppercase">{item.name}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default RuneBuilder;

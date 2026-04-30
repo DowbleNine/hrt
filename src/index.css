@@ -1,111 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Pirata+One&family=Metal+Mania&family=MedievalSharp&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Spectral:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400&family=Pirata+One&family=Metal+Mania&family=MedievalSharp&display=swap');
 @import "tailwindcss";
 
 @theme {
+  --font-sans: "Spectral", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cinzel", serif;
+  --font-mono: "JetBrains Mono", monospace;
   --font-gothic: "Pirata One", cursive;
-  --font-stone: "Cinzel", serif;
-  --font-book: "EB Garamond", serif;
+  
+  --color-arcane-gold: #c5a059;
+  --color-arcane-fire: #ff4d00;
+  --color-arcane-ice: #00d4ff;
+  --color-arcane-earth: #4ade80;
+  --color-arcane-air: #a5f3fc;
+  --color-parchment-light: #f4e4bc;
+  --color-parchment-dark: #d2b48c;
   
   --color-gold: #b8860b;
   --color-iron: #2c2c2c;
   --color-wax-red: #8b0000;
-  --color-parchment: #f4e4bc;
   --color-slate: #1a1a1a;
 }
 
 :root {
-  --bg-main: #f4e4bc;
-  --text-main: #2c1e14;
-  --border-main: #4a3728;
-  --accent-glow: 0 0 10px rgba(184, 134, 11, 0.3);
-}
-
-.catacumba {
   --bg-main: #1a1a1a;
   --text-main: #f4e4bc;
-  --border-main: #b8860b;
-  --accent-glow: 0 0 20px rgba(184, 134, 11, 0.5);
+  --border-main: #c5a059;
 }
 
 @layer base {
   body {
-    @apply transition-colors duration-700 ease-in-out antialiased overflow-x-hidden;
-    background-color: var(--bg-main);
-    color: var(--text-main);
-    font-family: var(--font-book);
-    cursor: url('https://cdn-icons-png.flaticon.com/32/3069/3069186.png'), auto; /* Feather Pen Placeholder */
+    @apply bg-[#1a1a1a] text-zinc-300 antialiased overflow-x-hidden;
+    background-image: radial-gradient(circle at center, #2a2218 0%, #121212 100%);
+    font-family: var(--font-sans);
   }
 
-  h1, h2, h3 {
-    font-family: var(--font-gothic);
-    @apply tracking-wider uppercase;
-  }
-
-  /* Custom Scrollbar - Ancient Style */
-  ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: var(--bg-main); }
-  ::-webkit-scrollbar-thumb { 
-    background: var(--border-main); 
-    border: 2px solid var(--bg-main);
+  h1, h2, h3, h4 {
+    @apply font-display tracking-wider uppercase;
   }
 }
 
-@layer components {
-  /* Forged Iron Navbar */
-  .iron-navbar {
-    @apply sticky top-0 z-[1000] flex justify-between items-center px-10 py-4;
-    background: url('/parchment.png'); /* Base background */
-    border-bottom: 8px solid transparent;
-    border-image: url('/viking-border.png') 30 round;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  }
-
-  .catacumba .iron-navbar {
-    background: #2c2c2c;
-    border-image: url('/viking-border.png') 30 round;
-  }
-
-  /* Sealing Wax Button */
-  .btn-wax {
-    @apply bg-wax-red text-parchment font-gothic text-xl py-3 px-10 rounded-full transition-all relative;
-    border: 3px solid #5a0000;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4), inset 0 0 10px rgba(0,0,0,0.5);
-  }
-
-  .btn-wax:hover {
-    @apply transform scale-105 brightness-110;
-    box-shadow: 0 0 20px rgba(139, 0, 0, 0.6);
-  }
-
-  .btn-wax:active { @apply scale-95; }
-
-  /* Ancient Divider */
-  .divider-spear {
-    @apply w-full h-8 my-8 opacity-60;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 32" fill="%234a3728"><path d="M0 16 L450 16 L460 0 L470 16 L530 16 L540 32 L550 16 L1000 16"/></svg>');
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  /* Card like Book Page */
-  .book-page {
-    @apply bg-parchment p-8 border-l-[15px] border-r-[2px] border-y-[2px] border-[#4a3728] shadow-2xl;
-    border-radius: 2px 8px 8px 2px;
-    position: relative;
-    color: #2c1e14;
-  }
-
-  .catacumba .book-page {
-    @apply bg-[#2c1e14] text-parchment border-[#b8860b];
-  }
+/* Reference Aesthetic Classes */
+.parchment-texture {
+  background-color: #f4e4bc;
+  background-image: url("https://www.transparenttextures.com/patterns/old-mathematics.png");
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.1), 0 10px 30px rgba(0,0,0,0.5);
 }
 
-/* Background Vinette */
-.vinette-overlay {
-  @apply fixed inset-0 pointer-events-none z-[9999];
-  background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.4) 100%);
+.magical-border {
+  border: 2px solid #c5a059;
+  position: relative;
 }
 
-.catacumba .vinette-overlay {
-  background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.7) 100%);
+@keyframes flicker {
+  0%, 100% { opacity: 1; transform: scale(1); filter: blur(2px) contrast(1.1); }
+  50% { opacity: 0.8; transform: scale(0.95); filter: blur(3px) contrast(0.9); }
+  75% { opacity: 0.9; transform: scale(1.02); filter: blur(2px) contrast(1.2); }
 }
+
+.candle-light {
+  background: radial-gradient(circle, rgba(255, 160, 50, 0.4) 0%, rgba(255, 100, 0, 0) 70%);
+  animation: flicker 4s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #1a1a1a; }
+::-webkit-scrollbar-thumb { 
+  background: #c5a059; 
+  border: 2px solid #1a1a1a;
+}
+
+.rune-glow-fire { filter: drop-shadow(0 0 12px rgba(255, 77, 0, 0.8)); }
+.rune-glow-ice { filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.8)); }
+.rune-glow-earth { filter: drop-shadow(0 0 12px rgba(74, 222, 128, 0.8)); }
+.rune-glow-air { filter: drop-shadow(0 0 12px rgba(165, 243, 252, 0.8)); }
