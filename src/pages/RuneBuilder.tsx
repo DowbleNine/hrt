@@ -123,10 +123,12 @@ const RuneBuilder: React.FC = () => {
                   className={`rb-item ${selectedCore?.id === core.id ? 'active' : ''}`}
                   onClick={() => setSelectedCore(selectedCore?.id === core.id ? null : core)}
                 >
-                  <div className="rb-item-icon">
-                    <svg viewBox="0 0 100 100">
-                      <path d={core.path} strokeWidth={core.strokeWidth} />
-                    </svg>
+                  <div className="rb-item-icon" style={core.image ? { backgroundImage: `url(${core.image})`, backgroundSize: 'cover', borderRadius: '8px' } : {}}>
+                    {!core.image && (
+                      <svg viewBox="0 0 100 100">
+                        <path d={core.path} strokeWidth={core.strokeWidth} />
+                      </svg>
+                    )}
                   </div>
                   <span className="rb-item-name">{core.name}</span>
                 </div>
@@ -143,10 +145,12 @@ const RuneBuilder: React.FC = () => {
                   className={`rb-item ${selectedVector?.id === vector.id ? 'active' : ''}`}
                   onClick={() => setSelectedVector(selectedVector?.id === vector.id ? null : vector)}
                 >
-                  <div className="rb-item-icon">
-                    <svg viewBox="0 0 100 100">
-                      <path d={vector.path} strokeWidth="3" />
-                    </svg>
+                  <div className="rb-item-icon" style={vector.image ? { backgroundImage: `url(${vector.image})`, backgroundSize: 'cover', borderRadius: '8px' } : {}}>
+                    {!vector.image && (
+                      <svg viewBox="0 0 100 100">
+                        <path d={vector.path} strokeWidth="3" />
+                      </svg>
+                    )}
                   </div>
                   <span className="rb-item-name">{vector.name}</span>
                 </div>
@@ -163,10 +167,12 @@ const RuneBuilder: React.FC = () => {
                   className={`rb-item ${selectedModulators.find(m => m.id === mod.id) ? 'active' : ''}`}
                   onClick={() => toggleModulator(mod)}
                 >
-                  <div className="rb-item-icon">
-                    <svg viewBox="0 0 100 100">
-                      <path d={mod.path} strokeWidth="2" />
-                    </svg>
+                  <div className="rb-item-icon" style={mod.image ? { backgroundImage: `url(${mod.image})`, backgroundSize: 'cover', borderRadius: '8px' } : {}}>
+                    {!mod.image && (
+                      <svg viewBox="0 0 100 100">
+                        <path d={mod.path} strokeWidth="2" />
+                      </svg>
+                    )}
                   </div>
                   <span className="rb-item-name">{mod.name}</span>
                 </div>
