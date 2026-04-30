@@ -5,6 +5,7 @@ import TransitionScreen from './pages/TransitionScreen';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import SuccessPage from './pages/SuccessPage';
+import RuneBuilder from './pages/RuneBuilder';
 
 export default function App() {
   return (
@@ -18,6 +19,9 @@ export default function App() {
         
         {/* A Landing Page Principal de Oferta (Boss Room) */}
         <Route path="/boss-room" element={<SalesPage />} />
+
+        {/* Ferramentas Arcanas */}
+        <Route path="/codice" element={<RuneBuilder />} />
 
         {/* Área do Aluno */}
         <Route path="/login" element={<Login />} />

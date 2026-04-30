@@ -26,9 +26,6 @@ async function getDiceToken() {
   const cid = process.env.DICE_CLIENT_ID;
   const csk = process.env.DICE_CLIENT_SECRET;
   
-  console.log('Diagnostic - ID (prefix):', cid ? cid.substring(0, 8) : 'MISSING');
-  console.log('Diagnostic - SECRET (prefix):', csk ? csk.substring(0, 8) : 'MISSING');
-
   if (diceToken && tokenExpiry && Date.now() < tokenExpiry) {
     return diceToken;
   }
@@ -56,21 +53,17 @@ app.post('/api/payments/create', async (req, res) => {
     return res.status(400).json({ error: 'Dados insuficientes' });
   }
 
-  // Limpar CPF (deixar apenas números)
   const cleanDocument = document.replace(/\D/g, '');
 
   const token = await getDiceToken();
   if (!token) {
-    console.error('Falha ao obter token Dice');
     return res.status(500).json({ error: 'Erro de conexão com gateway (Token)' });
   }
 
   const external_id = `order_${Date.now()}`;
-  const baseUrl = 'https://hrt-dun.vercel.app';
+  const baseUrl = process.env.BASE_URL || 'https://hrt-dun.vercel.app';
 
   try {
-    console.log('Solicitando PIX para:', { email, amount, product_name });
-    
     const response = await axios.post('https://api.use-dice.com/api/v2/payments/deposit', {
       product_name: product_name,
       amount: parseFloat(amount),
@@ -81,10 +74,7 @@ app.post('/api/payments/create', async (req, res) => {
       headers: { Authorization: `Bearer ${token}` }
     });
 
-    console.log('Resposta Dice:', response.data);
-
-    // Registrar transação pendente no Supabase
-    const { error: dbError } = await supabase.from('transactions').insert({
+    await supabase.from('transactions').insert({
       email,
       amount: parseFloat(amount),
       status: 'PENDING',
@@ -92,20 +82,13 @@ app.post('/api/payments/create', async (req, res) => {
       external_id
     });
 
-    if (dbError) {
-      console.error('Erro Supabase Insert:', dbError);
-      // Mesmo com erro no banco, vamos retornar o PIX para o usuário não travar
-    }
-
     res.json(response.data);
   } catch (error) {
-    const errorData = error.response?.data || error.message;
-    console.error('Erro detalhado Dice V2:', JSON.stringify(errorData));
-    res.status(400).json({ error: errorData });
+    res.status(400).json({ error: error.response?.data || error.message });
   }
 });
 
-// 2. Consulta de Status (Polling)
+// 2. Consulta de Status
 app.get('/api/payments/status/:id', async (req, res) => {
   const { id } = req.params;
   const token = await getDiceToken();
@@ -120,13 +103,12 @@ app.get('/api/payments/status/:id', async (req, res) => {
   }
 });
 
-// 3. Webhook (Confirmação Automática)
+// 3. Webhook
 app.post('/webhook/dice', async (req, res) => {
-  const { transaction_id, status, amount, external_id } = req.body;
+  const { transaction_id, status, amount } = req.body;
 
   if (status === 'COMPLETED') {
     try {
-      // 1. Buscar e-mail da transação
       const { data: tx } = await supabase
         .from('transactions')
         .select('email')
@@ -134,19 +116,13 @@ app.post('/webhook/dice', async (req, res) => {
         .single();
 
       if (tx) {
-        // 2. Definir Tier baseado no valor
-        // R$ 97 ou mais = High Ticket (Mentoria Elite)
-        // Abaixo de R$ 97 = Low Ticket (Guia Viral)
         const tier = amount >= 90 ? 'high' : 'low';
-
-        // 3. Upsert no perfil para liberar acesso
         await supabase.from('profiles').upsert({
           email: tx.email,
           tier: tier,
           updated_at: new Date()
         }, { onConflict: 'email' });
 
-        // 4. Atualizar status da transação
         await supabase
           .from('transactions')
           .update({ status: 'COMPLETED' })
@@ -156,8 +132,7 @@ app.post('/webhook/dice', async (req, res) => {
       console.error('Erro no Webhook:', error.message);
     }
   }
-
-  res.sendStatus(200); // Sempre retornar 200 para a Dice
+  res.sendStatus(200);
 });
 
 // 4. Salvar Runa no Códice
@@ -179,14 +154,17 @@ app.post('/api/runes/save', async (req, res) => {
     });
 
     if (error) throw error;
-
     res.json({ status: 'success', message: 'Magia salva no Códice com sucesso!' });
   } catch (error) {
-    console.error('Erro ao salvar runa:', error.message);
     res.status(500).json({ status: 'error', message: 'Erro ao salvar no banco de dados: ' + error.message });
   }
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 API Viral Gamer rodando na porta ${PORT}`);
-});
+// Suporte para rodar localmente e na Vercel
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 API Viral Gamer rodando na porta ${PORT}`);
+  });
+}
+
+export default app;

@@ -56,16 +56,16 @@ export default function Dashboard() {
             </div>
           )}
         </div>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
+
           {/* Main Content Area */}
           <div className="lg:col-span-2 space-y-8">
             <div>
               <h2 className="text-xl font-black uppercase tracking-widest text-white/50 mb-6 flex items-center gap-2">
                 <Video size={18} /> Treinamento: O Guia Viral
               </h2>
-              
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[1, 2, 3, 4].map((i) => (
                   <motion.div whileHover={{ y: -5 }} key={i} className="bg-[#111] border border-white/5 rounded-2xl overflow-hidden group cursor-pointer transition-all hover:border-white/20">
@@ -94,9 +94,9 @@ export default function Dashboard() {
               <h2 className="text-xl font-black uppercase tracking-widest text-lime-400/50 mb-6 flex items-center gap-2">
                 <Star size={18} /> Área Elite
               </h2>
-              
+
               <div className={`relative rounded-2xl overflow-hidden border ${isLowTicket ? 'border-white/5 bg-[#111]/50' : 'border-lime-500/30 bg-lime-950/10'}`}>
-                
+
                 {isLowTicket && (
                   <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md p-8 text-center">
                     <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mb-4 border border-white/10">
@@ -104,7 +104,7 @@ export default function Dashboard() {
                     </div>
                     <h3 className="font-black text-white uppercase tracking-tighter mb-2">ACESSO BLOQUEADO</h3>
                     <p className="text-xs text-gray-500 mb-6 leading-relaxed">Este recurso é exclusivo para membros da Mentoria Elite.</p>
-                    <button 
+                    <button
                       onClick={() => window.location.href = '/#pricing'}
                       className="bg-gradient-to-r from-neon-green to-emerald-600 text-black text-[10px] font-black px-6 py-3 rounded-xl uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_20px_rgba(16,185,129,0.3)]"
                     >
@@ -115,11 +115,11 @@ export default function Dashboard() {
 
                 <div className={`p-8 ${isLowTicket ? 'opacity-20 grayscale' : ''}`}>
                   <div className="w-12 h-12 rounded-2xl bg-lime-500/10 flex items-center justify-center mb-6 border border-lime-500/20">
-                    <MessageSquare className="text-lime-400" size={24} />
+                    <Discord className="text-lime-400" size={24} />
                   </div>
                   <h3 className="text-2xl font-black mb-2 text-white uppercase tracking-tighter">Comunidade VIP</h3>
                   <p className="text-sm text-gray-400 mb-8 leading-relaxed">Networking direto com grandes players e suporte individual 24/7.</p>
-                  
+
                   <button className="w-full bg-lime-500 hover:bg-lime-400 text-black font-black uppercase py-4 rounded-xl transition-all hover:shadow-[0_0_20px_rgba(132,204,22,0.4)]" disabled={isLowTicket}>
                     Entrar no Discord
                   </button>
@@ -128,14 +128,14 @@ export default function Dashboard() {
 
               {/* Mentoria Card */}
               <div className={`mt-8 p-8 rounded-2xl border ${isLowTicket ? 'border-white/5 bg-[#111]/50 grayscale opacity-20' : 'border-neon-green/20 bg-neon-green/5'}`}>
-                 <div className="flex items-center gap-3 mb-4">
-                   <Zap className="text-neon-green" size={20} />
-                   <h3 className="font-black text-white uppercase tracking-widest text-sm">Mentoria Mensal</h3>
-                 </div>
-                 <p className="text-xs text-gray-500 mb-6 leading-relaxed">Call em grupo para análise de canais e estratégias de mineração.</p>
-                 <button className="text-[10px] uppercase font-black tracking-widest text-neon-green border border-neon-green/30 px-6 py-3 rounded-xl hover:bg-neon-green hover:text-black transition-all" disabled={isLowTicket}>
-                   Ver Calendário
-                 </button>
+                <div className="flex items-center gap-3 mb-4">
+                  <Zap className="text-neon-green" size={20} />
+                  <h3 className="font-black text-white uppercase tracking-widest text-sm">Mentoria Mensal</h3>
+                </div>
+                <p className="text-xs text-gray-500 mb-6 leading-relaxed">Call em grupo para análise de canais e estratégias de mineração.</p>
+                <button className="text-[10px] uppercase font-black tracking-widest text-neon-green border border-neon-green/30 px-6 py-3 rounded-xl hover:bg-neon-green hover:text-black transition-all" disabled={isLowTicket}>
+                  Ver Calendário
+                </button>
               </div>
             </div>
           </div>
