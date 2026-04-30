@@ -91,21 +91,6 @@ const RuneBuilder: React.FC = () => {
 
   return (
     <div className="rune-builder-page">
-      <header className="rb-header">
-        <div className="rb-logo">
-          <h1>REINOS RÚNICOS</h1>
-          <span className="rb-subtitle">CÓDICE DE ALTA GEOMETRIA</span>
-        </div>
-        <div className="rb-user-box">
-          <input 
-            type="email" 
-            placeholder="E-mail do Bruxo..." 
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
-          />
-        </div>
-      </header>
-
       <main className="rb-ritual-area">
         {/* TRIAD SLOTS */}
         <div className="ritual-triad">
@@ -147,7 +132,7 @@ const RuneBuilder: React.FC = () => {
         </div>
 
         {/* CENTRAL SCROLL */}
-        <div className="manifestation-scroll">
+        <div className="manifestation-scroll book-page">
           <div className="scroll-content">
             <h2 className="spell-name-pt">{spellName}</h2>
             <div className="power-indicator">
@@ -157,11 +142,11 @@ const RuneBuilder: React.FC = () => {
               </div>
             </div>
             <p className="spell-manifestation">{spellDesc}</p>
-            <div className="syntax-tag" style={{ color: getSyntaxLevel().color }}>
+            <div className="syntax-tag" style={{ color: getSyntaxLevel().color, fontFamily: 'Cinzel', letterSpacing: '4px' }}>
               Geometria {getSyntaxLevel().level}
             </div>
           </div>
-          <button className="btn-save-ritual" onClick={saveSpell} disabled={isSaving}>
+          <button className="btn-wax mt-10" onClick={saveSpell} disabled={isSaving}>
             {isSaving ? 'INVOCANDO...' : 'SALVAR NO GRIMÓRIO'}
           </button>
         </div>

@@ -1,87 +1,111 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Almendra:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Pirata+One&family=Metal+Mania&family=MedievalSharp&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Almendra", serif;
-  --font-display: "Cinzel", serif;
-  --font-mono: "Courier New", monospace;
+  --font-gothic: "Pirata One", cursive;
+  --font-stone: "Cinzel", serif;
+  --font-book: "EB Garamond", serif;
   
-  --color-neon-green: #4a3728; /* Deep Wood */
-  --color-neon-cyan: #b8860b;  /* Aged Gold */
-  --color-dark-bg: #1a120b;    /* Darkest Wood */
-  --color-dark-surface: #2c1e14;
-  --color-dark-card: #f4e4bc;   /* Parchment Light */
-  --color-slate-text: #2c1e14;  /* Ink Brown */
-  --color-slate-border: #8b5a2b; /* Medium Wood */
+  --color-gold: #b8860b;
+  --color-iron: #2c2c2c;
+  --color-wax-red: #8b0000;
+  --color-parchment: #f4e4bc;
+  --color-slate: #1a1a1a;
+}
 
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0px); }
-  }
+:root {
+  --bg-main: #f4e4bc;
+  --text-main: #2c1e14;
+  --border-main: #4a3728;
+  --accent-glow: 0 0 10px rgba(184, 134, 11, 0.3);
+}
+
+.catacumba {
+  --bg-main: #1a1a1a;
+  --text-main: #f4e4bc;
+  --border-main: #b8860b;
+  --accent-glow: 0 0 20px rgba(184, 134, 11, 0.5);
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
   body {
-    @apply bg-dark-bg text-slate-text font-sans antialiased overflow-x-hidden;
-    background-image: url('/wood.png');
-    background-size: 500px;
-    background-repeat: repeat;
+    @apply transition-colors duration-700 ease-in-out antialiased overflow-x-hidden;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-book);
+    cursor: url('https://cdn-icons-png.flaticon.com/32/3069/3069186.png'), auto; /* Feather Pen Placeholder */
   }
 
-  h1, h2, h3, h4 {
-    @apply font-display font-bold tracking-normal;
-    color: var(--color-neon-cyan);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  h1, h2, h3 {
+    font-family: var(--font-gothic);
+    @apply tracking-wider uppercase;
+  }
+
+  /* Custom Scrollbar - Ancient Style */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg-main); }
+  ::-webkit-scrollbar-thumb { 
+    background: var(--border-main); 
+    border: 2px solid var(--bg-main);
   }
 }
 
 @layer components {
-  .parchment-bg {
-    background-image: url('/parchment.png');
-    background-size: cover;
-    background-position: center;
-    border: 8px double #4a3728;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 50px rgba(0,0,0,0.1);
+  /* Forged Iron Navbar */
+  .iron-navbar {
+    @apply sticky top-0 z-[1000] flex justify-between items-center px-10 py-4;
+    background: url('/parchment.png'); /* Base background */
+    border-bottom: 8px solid transparent;
+    border-image: url('/viking-border.png') 30 round;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
 
-  .card {
-    background-color: var(--color-dark-card);
-    border: 2px solid var(--color-slate-border);
-    border-radius: 0.125rem;
+  .catacumba .iron-navbar {
+    background: #2c2c2c;
+    border-image: url('/viking-border.png') 30 round;
+  }
+
+  /* Sealing Wax Button */
+  .btn-wax {
+    @apply bg-wax-red text-parchment font-gothic text-xl py-3 px-10 rounded-full transition-all relative;
+    border: 3px solid #5a0000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4), inset 0 0 10px rgba(0,0,0,0.5);
+  }
+
+  .btn-wax:hover {
+    @apply transform scale-105 brightness-110;
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.6);
+  }
+
+  .btn-wax:active { @apply scale-95; }
+
+  /* Ancient Divider */
+  .divider-spear {
+    @apply w-full h-8 my-8 opacity-60;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 32" fill="%234a3728"><path d="M0 16 L450 16 L460 0 L470 16 L530 16 L540 32 L550 16 L1000 16"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  /* Card like Book Page */
+  .book-page {
+    @apply bg-parchment p-8 border-l-[15px] border-r-[2px] border-y-[2px] border-[#4a3728] shadow-2xl;
+    border-radius: 2px 8px 8px 2px;
+    position: relative;
     color: #2c1e14;
   }
-  .card.parchment {
-    background-image: url('/parchment.png');
-    background-size: cover;
-    background-position: center;
-    border: 8px double #4a3728;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 50px rgba(0,0,0,0.1);
-  }
 
-  .btn-primary {
-    @apply bg-[#4a3728] text-[#f4e4bc] font-display font-bold py-4 px-8 rounded-sm transition-all hover:brightness-110 active:scale-95 text-center uppercase tracking-widest border-2 border-[#b8860b];
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  .catacumba .book-page {
+    @apply bg-[#2c1e14] text-parchment border-[#b8860b];
   }
+}
 
-  .btn-outline {
-    @apply border-2 border-[#4a3728] text-[#4a3728] hover:bg-[#4a3728]/10 font-bold py-2 px-6 rounded-sm transition-all text-center uppercase text-sm font-display;
-  }
+/* Background Vinette */
+.vinette-overlay {
+  @apply fixed inset-0 pointer-events-none z-[9999];
+  background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.4) 100%);
+}
 
-  .ancient-border {
-    border: 4px double #4a3728;
-    position: relative;
-  }
-
-  .ancient-border::after {
-    content: '';
-    position: absolute;
-    top: -10px; left: -10px; right: -10px; bottom: -10px;
-    border: 1px solid #b8860b;
-    pointer-events: none;
-    opacity: 0.3;
-  }
+.catacumba .vinette-overlay {
+  background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.7) 100%);
 }
