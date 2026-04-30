@@ -157,10 +157,6 @@ const RuneBuilder: React.FC = () => {
             animate={{ rotateY: 0, opacity: 1 }}
             className="parchment-texture w-full h-full p-12 md:p-20 relative rounded-sm text-zinc-900 flex flex-col justify-between magical-border"
           >
-            <div className="absolute top-6 right-6 w-16 h-16 bg-red-800 rounded-full shadow-2xl flex items-center justify-center -rotate-12 border-2 border-red-900 border-dashed z-20">
-              <span className="text-white font-display text-xs">CÓDICE</span>
-            </div>
-
             <div className="flex flex-col items-center text-center">
               <h2 className="text-5xl font-display font-bold mb-14 border-b-4 border-zinc-400/30 pb-6 w-full tracking-tighter">RESULTADO DA COMBINAÇÃO</h2>
               
@@ -217,7 +213,6 @@ const RuneBuilder: React.FC = () => {
             </div>
 
             <div className="mt-20 border-t-4 border-zinc-400/20 pt-10 text-center w-full">
-              <span className="font-bold block text-xl not-italic uppercase tracking-[0.5em] opacity-80 mb-6">NOME EM PORTUGUÊS</span>
               <h3 className="text-8xl font-power tracking-tighter text-red-950 leading-none drop-shadow-2xl uppercase break-words px-4">
                 {spellResult?.title}
               </h3>
