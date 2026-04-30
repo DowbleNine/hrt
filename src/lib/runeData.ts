@@ -4,6 +4,7 @@ export interface RuneBase {
   path: string;
   description: string;
   image?: string;
+  color?: string;
 }
 
 export interface CoreRune extends RuneBase {
@@ -39,7 +40,8 @@ export const RUNE_DATA = {
       path: "M 50 20 L 50 80 M 50 50 L 80 30 M 50 50 L 80 70",
       strokeWidth: 6,
       anchors: { top: [50, 20], bottom: [50, 80], left: [40, 50], right: [60, 50] },
-      image: "/assets/runes/pyros.png"
+      image: "/assets/runes/pyros.png",
+      color: "#ff4d00"
     },
     hydros: {
       id: "hydros",
@@ -50,7 +52,8 @@ export const RUNE_DATA = {
       path: "M 50 20 L 50 80",
       strokeWidth: 8,
       anchors: { top: [50, 20], bottom: [50, 80], left: [40, 50], right: [60, 50] },
-      image: "/assets/runes/hydros.png"
+      image: "/assets/runes/hydros.png",
+      color: "#00d4ff"
     },
     haemus: {
       id: "haemus",
@@ -61,7 +64,8 @@ export const RUNE_DATA = {
       path: "M 30 20 L 30 80 L 70 80 L 70 20",
       strokeWidth: 6,
       anchors: { top: [50, 20], bottom: [50, 80], left: [30, 50], right: [70, 50] },
-      image: "/assets/runes/haemus.png"
+      image: "/assets/runes/haemus.png",
+      color: "#ff0000"
     },
     aethel: {
       id: "aethel",
@@ -72,7 +76,8 @@ export const RUNE_DATA = {
       path: "M 40 20 L 40 80 M 40 30 L 70 45 M 40 50 L 70 65",
       strokeWidth: 5,
       anchors: { top: [40, 20], bottom: [40, 80], left: [30, 50], right: [70, 50] },
-      image: "/assets/runes/aethel.png"
+      image: "/assets/runes/aethel.png",
+      color: "#ffffff"
     },
     fulgor: {
       id: "fulgor",
@@ -83,7 +88,8 @@ export const RUNE_DATA = {
       path: "M 40 20 L 60 40 L 40 60 L 60 80",
       strokeWidth: 5,
       anchors: { top: [50, 20], bottom: [50, 80], left: [40, 50], right: [60, 50] },
-      image: "/assets/runes/fulgor.png"
+      image: "/assets/runes/fulgor.png",
+      color: "#bf00ff"
     },
     skotos: {
       id: "skotos",
@@ -94,7 +100,8 @@ export const RUNE_DATA = {
       path: "M 50 20 L 50 80 M 30 50 L 70 50",
       strokeWidth: 4,
       anchors: { top: [50, 20], bottom: [50, 80], left: [30, 50], right: [70, 50] },
-      image: "/assets/runes/skotos.png"
+      image: "/assets/runes/skotos.png",
+      color: "#4b0082"
     },
     kinesis: {
       id: "kinesis",
@@ -105,7 +112,8 @@ export const RUNE_DATA = {
       path: "M 30 30 L 70 70 M 70 30 L 30 70",
       strokeWidth: 7,
       anchors: { top: [50, 30], bottom: [50, 70], left: [30, 50], right: [70, 50] },
-      image: "/assets/runes/kinesis.png"
+      image: "/assets/runes/kinesis.png",
+      color: "#9400d3"
     },
     geos: {
       id: "geos",
@@ -116,7 +124,8 @@ export const RUNE_DATA = {
       path: "M 30 80 L 70 80 M 50 20 L 50 80 M 35 70 L 65 70",
       strokeWidth: 7,
       anchors: { top: [50, 20], bottom: [50, 80], left: [30, 50], right: [70, 50] },
-      image: "/assets/runes/geos.png"
+      image: "/assets/runes/geos.png",
+      color: "#ff8c00"
     }
   } as Record<string, CoreRune>,
   vectors: {
