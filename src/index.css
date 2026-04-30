@@ -52,7 +52,10 @@
 }
 
 /* Specific glows */
-.rune-glow-fire { filter: drop-shadow(0 0 8px rgba(255, 77, 0, 0.6)); }
-.rune-glow-ice { filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6)); }
-.rune-glow-earth { filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.6)); }
-.rune-glow-air { filter: drop-shadow(0 0 8px rgba(165, 243, 252, 0.6)); }
+.rune-glow-fire { filter: drop-shadow(0 0 12px rgba(255, 77, 0, 0.8)); }
+.rune-glow-ice { filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.8)); }
+.rune-glow-earth { filter: drop-shadow(0 0 12px rgba(74, 222, 128, 0.8)); }
+.rune-glow-air { filter: drop-shadow(0 0 12px rgba(165, 243, 252, 0.8)); }
+.rune-glow-lightning { filter: drop-shadow(0 0 12px rgba(255, 204, 0, 0.8)); }
+.rune-glow-shadow { filter: drop-shadow(0 0 12px rgba(106, 13, 173, 0.8)); }
+.rune-glow-gravity { filter: drop-shadow(0 0 12px rgba(75, 0, 130, 0.8)); }

@@ -1,142 +1,79 @@
-export interface RuneBase {
+import { Flame, Droplet, Wind, Mountain, Zap, Moon, Aperture, Droplets, ArrowUpRight, Circle, Shield, Shrink, RefreshCw, Target, PlusCircle, FastForward, Timer, Anchor, Link, Cloud, ArrowDownCircle, ShieldAlert } from 'lucide-react';
+
+export interface Rune {
   id: string;
   name: string;
   description: string;
-  image?: string;
   color: string;
-  category: 'core' | 'vector' | 'modulator';
 }
 
-export interface CoreRune extends RuneBase {
-  category: 'core';
-  element: string;
+export const CORE_RUNES: Rune[] = [
+  { id: 'pyros', name: 'Fogo', description: 'Energia térmica primordial', color: '#ff4d00' },
+  { id: 'hydros', name: 'Água', description: 'Fluidez e adaptação', color: '#00a2ff' },
+  { id: 'aethel', name: 'Ar', description: 'Leveza e movimento etéreo', color: '#00f2ff' },
+  { id: 'geos', name: 'Terra', description: 'Estabilidade e resistência', color: '#8b5a2b' },
+  { id: 'haemus', name: 'Sangue', description: 'Vitalidade e sacrifício', color: '#ff0033' },
+  { id: 'fulgor', name: 'Raio', description: 'Energia elétrica súbita', color: '#ffcc00' },
+  { id: 'skotos', name: 'Sombra', description: 'Ocultação e vazio', color: '#6a0dad' },
+  { id: 'kinesis', name: 'Gravidade', description: 'Atração e distorção espacial', color: '#4b0082' },
+];
+
+export const VECTOR_RUNES: Rune[] = [
+  { id: 'impetus', name: 'Projeção', description: 'Direciona a energia para frente', color: '#c5a059' },
+  { id: 'sphera', name: 'Expansão', description: 'Expande a energia em todas as direções', color: '#c5a059' },
+  { id: 'murus', name: 'Retenção', description: 'Cria uma barreira estática', color: '#c5a059' },
+  { id: 'axis', name: 'Compressão', description: 'Concentra a energia em um ponto', color: '#c5a059' },
+  { id: 'vertex', name: 'Vórtice', description: 'Gira a energia em espiral', color: '#c5a059' },
+  { id: 'trajectum', name: 'Guia', description: 'Torna a energia autoguiada', color: '#c5a059' },
+];
+
+export const MODULATOR_RUNES: Rune[] = [
+  { id: 'magnus', name: 'Potência', description: 'Aumenta a força bruta', color: '#c5a059' },
+  { id: 'velox', name: 'Aceleração', description: 'Aumenta a velocidade de execução', color: '#c5a059' },
+  { id: 'aeterna', name: 'Duração', description: 'Aumenta o tempo de persistência', color: '#c5a059' },
+  { id: 'fixus', name: 'Estabilidade', description: 'Torna a magia imutável', color: '#c5a059' },
+  { id: 'sincron', name: 'Convergência', description: 'Sincroniza múltiplos efeitos', color: '#c5a059' },
+  { id: 'levitas', name: 'Leveza', description: 'Reduz a massa do efeito', color: '#c5a059' },
+  { id: 'gravis', name: 'Peso', description: 'Aumenta a densidade do efeito', color: '#c5a059' },
+  { id: 'fragilis', name: 'Ruptura', description: 'Foca em quebrar defesas', color: '#c5a059' },
+];
+
+export interface SpellResult {
+  title: string;
+  power: string;
 }
 
-export interface VectorRune extends RuneBase {
-  category: 'vector';
-  action: string;
-}
+export const getSpellResult = (core: Rune, vector: Rune, modulator: Rune): SpellResult => {
+  const titles: Record<string, string> = {
+    // Cores
+    pyros: 'ÍGNEO', hydros: 'AQUÁTICO', aethel: 'ETÉREO', geos: 'TELÚRICO',
+    haemus: 'VITAL', fulgor: 'ELÉTRICO', skotos: 'ABISSAL', kinesis: 'GRAVITACIONAL',
+    // Vetores
+    impetus: 'DE PROJEÇÃO', sphera: 'DE EXPANSÃO', murus: 'DE RETENÇÃO',
+    axis: 'DE COMPRESSÃO', vertex: 'DE VÓRTICE', trajectum: 'DE GUIA',
+    // Moduladores
+    magnus: 'MASSIVO', velox: 'ACELERADO', aeterna: 'ETERNO',
+    fixus: 'ESTÁVEL', sincron: 'CONVERGENTE', levitas: 'LEVE',
+    gravis: 'PESADO', fragilis: 'DISRUPTIVO'
+  };
 
-export interface ModulatorRune extends RuneBase {
-  category: 'modulator';
-  property: string;
-}
+  const actions: Record<string, string> = {
+    impetus: 'dispara um feixe', sphera: 'libera uma onda', murus: 'ergue um muro',
+    axis: 'colapsa um ponto', vertex: 'gera um ciclone', trajectum: 'lança um projétil'
+  };
 
-export const RUNE_DATA = {
-  cores: {
-    fire: {
-      id: 'fire',
-      name: 'Fogo',
-      element: 'Fogo',
-      description: 'Canaliza calor intenso e combustão elemental.',
-      color: '#ff4d00',
-      category: 'core',
-      image: '/assets/runes/pyros.png'
-    },
-    water: {
-      id: 'water',
-      name: 'Água',
-      element: 'Água',
-      description: 'Manipula fluidos e energias regenerativas.',
-      color: '#00d4ff',
-      category: 'core',
-      image: '/assets/runes/hydros.png'
-    },
-    earth: {
-      id: 'earth',
-      name: 'Terra',
-      element: 'Terra',
-      description: 'Manifesta força telúrica e solidez mineral.',
-      color: '#4ade80',
-      category: 'core',
-      image: '/assets/runes/geos.png'
-    },
-    air: {
-      id: 'air',
-      name: 'Ar',
-      element: 'Ar',
-      description: 'Domina correntes atmosféricas e agilidade.',
-      color: '#a5f3fc',
-      category: 'core',
-      image: '/assets/runes/fulgor.png'
-    }
-  } as Record<string, CoreRune>,
+  const effects: Record<string, string> = {
+    magnus: 'devastador', velox: 'instantâneo', aeterna: 'contínuo',
+    fixus: 'impenetrável', sincron: 'harmonizado', levitas: 'flutuante',
+    gravis: 'esmagador', fragilis: 'perfurante'
+  };
 
-  vectors: {
-    direction: {
-      id: 'direction',
-      name: 'Direção',
-      action: 'Direção',
-      description: 'Guia a energia em trajetórias lineares.',
-      color: '#c5a059',
-      category: 'vector',
-      image: '/assets/runes/impetus.png'
-    },
-    speed: {
-      id: 'speed',
-      name: 'Velocidade',
-      action: 'Velocidade',
-      description: 'Acelera a propagação do efeito elemental.',
-      color: '#c5a059',
-      category: 'vector',
-      image: '/assets/runes/kinesis.png'
-    },
-    range: {
-      id: 'range',
-      name: 'Alcance',
-      action: 'Alcance',
-      description: 'Expande a distância de influência da magia.',
-      color: '#c5a059',
-      category: 'vector',
-      image: '/assets/runes/vertex.png'
-    },
-    curve: {
-      id: 'curve',
-      name: 'Curva',
-      action: 'Curva',
-      description: 'Dobra a realidade para atingir alvos ocultos.',
-      color: '#c5a059',
-      category: 'vector',
-      image: '/assets/runes/trajeto.png'
-    }
-  } as Record<string, VectorRune>,
+  const coreName = core.name.toUpperCase();
+  const vectorAction = actions[vector.id];
+  const modEffect = effects[modulator.id];
 
-  modulators: {
-    intensity: {
-      id: 'intensity',
-      name: 'Intensidade',
-      property: 'Intensidade',
-      description: 'Amplifica a potência bruta do efeito.',
-      color: '#facc15',
-      category: 'modulator',
-      image: '/assets/runes/magnus.png'
-    },
-    duration: {
-      id: 'duration',
-      name: 'Duração',
-      property: 'Duração',
-      description: 'Mantém o efeito ativo por ciclos prolongados.',
-      color: '#facc15',
-      category: 'modulator',
-      image: '/assets/runes/haemus.png'
-    },
-    volume: {
-      id: 'volume',
-      name: 'Volume',
-      property: 'Volume',
-      description: 'Aumenta a massa física da manifestação.',
-      color: '#facc15',
-      category: 'modulator',
-      image: '/stone-texture.png'
-    },
-    secondary: {
-      id: 'secondary',
-      name: 'Secundário',
-      property: 'Secundário',
-      description: 'Adiciona uma ressonância harmônica extra.',
-      color: '#facc15',
-      category: 'modulator',
-      image: '/stone-texture.png'
-    }
-  } as Record<string, ModulatorRune>
+  return {
+    title: `${titles[modulator.id]} ${coreName} ${titles[vector.id]}`,
+    power: `Esta combinação ${vectorAction} de ${core.description.toLowerCase()} com um efeito ${modEffect}, resultando em uma manifestação mágica de alta complexidade.`
+  };
 };
