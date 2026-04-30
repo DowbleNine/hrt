@@ -1,297 +1,246 @@
 .rune-builder-page {
   min-height: 100vh;
-  background-image: url('/wood.png');
-  background-size: 600px;
-  color: #2c1e14;
-  font-family: 'MedievalSharp', cursive;
+  background: #0a0a0a url('https://www.transparenttextures.com/patterns/dark-wood.png');
+  color: #f4e4bc;
+  font-family: 'EB Garamond', serif;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-.rb-header {
-  padding: 1.5rem 4rem;
+/* TOP HEADER */
+.forge-header {
+  height: 60px;
+  background: linear-gradient(to bottom, #2c2c2c, #1a1a1a);
+  border-bottom: 2px solid #b8860b;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: url('/parchment.png');
-  background-size: cover;
-  border-bottom: 8px solid #4a3728;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  z-index: 100;
+  padding: 0 2rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+  z-index: 1000;
 }
 
-.rb-logo h1 {
-  font-family: 'Pirata One', cursive;
-  font-size: 3.5rem;
-  color: #3d2b1f;
-  margin: 0;
-  text-shadow: 2px 2px 0px #b8860b;
-}
-
-.rb-user-box input {
-  background: rgba(0,0,0,0.1);
-  border: 2px solid #4a3728;
-  padding: 12px 20px;
-  border-radius: 4px;
-  font-family: 'MedievalSharp', cursive;
-  color: #3d2b1f;
-  width: 300px;
-  box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.rb-ritual-area {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 3rem 2rem;
-  gap: 3rem;
-  background: rgba(0,0,0,0.5);
-  mask-image: radial-gradient(circle, black 60%, transparent 100%);
-}
-
-/* TRIAD SLOTS */
-.ritual-triad {
-  display: flex;
-  justify-content: center;
-  gap: 5rem;
-  width: 100%;
-  max-width: 1200px;
-}
-
-.ritual-slot-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  width: 250px;
-}
-
-.slot-label {
-  font-family: 'Pirata One', cursive;
-  font-size: 1.8rem;
-  color: #b8860b;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+.forge-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
   letter-spacing: 2px;
+  color: #b8860b;
 }
 
-.grid-section.glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
-}
-
-.slot-desc.glass {
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
-.ritual-slot {
-  width: 180px;
-  height: 180px;
-  background: rgba(0,0,0,0.3);
-  border: 15px solid transparent;
-  border-image: url('/viking-border.png') 100 round;
-  border-radius: 50%;
+.header-icons {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  cursor: pointer;
-  transition: box-shadow 0.5s ease, border-color 0.5s ease;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.7), inset 0 0 30px rgba(0,0,0,0.5);
+  gap: 1.5rem;
+  opacity: 0.7;
 }
 
-.ritual-slot.filled {
-  transform: scale(1.1);
-  box-shadow: 0 0 50px rgba(184, 134, 11, 0.4);
-}
-
-.ritual-slot img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  filter: brightness(1.1) contrast(1.1);
-}
-
-.slot-placeholder {
-  font-size: 4rem;
-  color: #4a3728;
-  opacity: 0.5;
-}
-
-.slot-desc {
-  background: rgba(255, 228, 188, 0.15);
+/* MAIN LAYOUT: 3 COLUMNS */
+.forge-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 420px 1fr 400px;
+  gap: 0;
   padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid #8b5a2b;
-  font-size: 0.95rem;
-  text-align: center;
-  color: #f4e4bc;
-  line-height: 1.4;
-  min-height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: calc(100vh - 60px);
 }
 
-/* CENTRAL SCROLL */
-.manifestation-scroll {
-  width: 100%;
-  max-width: 800px;
+/* LEFT COLUMN: THE BOOK (GRIMORIO) */
+.grimorio-section {
   background: url('/parchment.png');
   background-size: cover;
-  padding: 3rem 5rem;
-  border: 20px solid transparent;
-  border-image: url('/viking-border.png') 60 round;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-  position: relative;
+  border-radius: 10px 0 0 10px;
+  border: 12px solid #3d2b1f;
+  box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  position: relative;
 }
 
-.spell-name-pt {
+.grimorio-section::before {
+  content: '';
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 60px; height: 60px;
+  background: url('https://cdn-icons-png.flaticon.com/512/3233/3233516.png'); /* Wax Seal */
+  background-size: contain;
+}
+
+.grimorio-title {
   font-family: 'Pirata One', cursive;
-  font-size: 3.5rem;
-  margin: 0 0 1.5rem 0;
+  font-size: 2.2rem;
   color: #3d2b1f;
-  border-bottom: 2px solid #8b5a2b;
-  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1;
 }
 
-.power-indicator {
+.magic-circle-container {
+  width: 300px;
+  height: 300px;
+  position: relative;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 2rem;
 }
 
-.power-indicator span {
-  font-family: 'Cinzel', serif;
-  font-weight: 900;
-  color: #8b5a2b;
-}
-
-.power-mini-bar {
-  height: 8px;
-  background: rgba(0,0,0,0.1);
-  border: 1px solid #4a3728;
+.transmutation-circle {
   width: 100%;
-}
-
-.power-mini-bar .fill {
   height: 100%;
-  background: #b8860b;
+  position: absolute;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="%23b8860b" stroke-width="0.5" stroke-dasharray="2 2"/><circle cx="50" cy="50" r="38" fill="none" stroke="%23b8860b" stroke-width="1"/><path d="M50 5 L90 75 L10 75 Z" fill="none" stroke="%23b8860b" stroke-width="0.5"/></svg>');
+  background-size: contain;
+  animation: rotate-slow 20s linear infinite;
+  opacity: 0.4;
 }
 
-.spell-manifestation {
-  font-family: 'Almendra', serif;
-  font-size: 1.5rem;
-  line-height: 1.4;
-  color: #2c1e14;
-  font-style: italic;
-  margin-bottom: 2.5rem;
-}
+@keyframes rotate-slow { from { rotate: 0deg; } to { rotate: 360deg; } }
 
-.syntax-tag {
-  font-family: 'Cinzel', serif;
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-}
-
-.btn-save-ritual {
-  margin-top: 2rem;
-  background: #3d2b1f;
-  color: #f4e4bc;
-  border: 3px solid #b8860b;
-  padding: 1rem 4rem;
-  font-family: 'Pirata One', cursive;
-  font-size: 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-}
-
-.btn-save-ritual:hover {
-  background: #4a3728;
-  transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.6);
-}
-
-/* SELECTION GRIDS */
-.selection-grids-container {
-  display: flex;
-  gap: 4rem;
-  width: 100%;
-  max-width: 1400px;
-  justify-content: center;
-}
-
-.grid-section {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-}
-
-.grid-section h3 {
-  font-family: 'Pirata One', cursive;
-  font-size: 1.8rem;
-  color: #f4e4bc;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.ritual-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-}
-
-.grid-item {
-  background: url('/stone-texture.png');
-  background-size: cover;
-  border: 2px solid #2c1e14;
-  border-radius: 8px;
-  padding: 0.8rem;
+/* MIDDLE COLUMN: THE MAP (PAPIRO) */
+.mapa-section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1rem 3rem;
+  position: relative;
+}
+
+.papiro-scroll {
+  width: 100%;
+  height: 100%;
+  background: url('/parchment.png');
+  background-size: cover;
+  padding: 3rem;
+  border-left: 2px solid rgba(0,0,0,0.1);
+  border-right: 2px solid rgba(0,0,0,0.1);
+  box-shadow: 0 0 50px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mapa-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  color: #3d2b1f;
+  margin-bottom: 3rem;
+  letter-spacing: 5px;
+}
+
+.ritual-triangle {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  margin-top: 2rem;
+}
+
+.triangle-line {
+  position: absolute;
+  background: #3d2b1f;
+  height: 2px;
+  opacity: 0.2;
+}
+
+/* RIGHT COLUMN: THE LIBRARY (STONE) */
+.biblioteca-section {
+  background: #1a1a1a url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+  border-left: 5px solid #b8860b;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+
+.biblioteca-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  color: #b8860b;
+  text-align: center;
+  border-bottom: 1px solid #333;
+  padding-bottom: 1rem;
+}
+
+.shelf-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.shelf-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.shelf-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.stone-item {
+  aspect-ratio: 1;
+  background: #000;
+  border: 1px solid #333;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
 }
 
-.grid-item:hover {
-  filter: brightness(1.2);
-  transform: translateY(-3px);
+.stone-item img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  filter: brightness(0.6);
 }
 
-.grid-item.active {
-  border-color: #ffd700;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+.stone-item.active {
+  border-color: #b8860b;
+  box-shadow: 0 0 15px rgba(184, 134, 11, 0.5);
 }
 
-.grid-item img {
-  width: 50px;
-  height: 50px;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
+.stone-item.active img {
+  filter: brightness(1.2) drop-shadow(0 0 5px #b8860b);
 }
 
-.grid-item span {
-  font-size: 0.85rem;
-  color: #2c1e14;
-  font-weight: bold;
+.stone-label {
+  position: absolute;
+  bottom: 2px;
+  font-size: 0.6rem;
+  color: #666;
+}
+
+/* CANDLES */
+.candle {
+  width: 30px; height: 80px;
+  background: #f4e4bc;
+  border-radius: 5px;
+  position: absolute;
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.2);
+}
+
+.candle-flame {
+  width: 10px; height: 15px;
+  background: orange;
+  border-radius: 50% 50% 20% 20%;
+  position: absolute;
+  top: -12px; left: 10px;
+  animation: flicker 0.1s infinite alternate;
+}
+
+@keyframes flicker {
+  from { transform: scale(1); opacity: 0.8; }
+  to { transform: scale(1.1); opacity: 1; }
 }
