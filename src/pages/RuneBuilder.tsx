@@ -162,7 +162,7 @@ const RuneBuilder: React.FC = () => {
             </div>
 
             <div className="flex flex-col items-center text-center">
-              <h2 className="text-2xl font-display font-bold mb-8 border-b-2 border-zinc-400/30 pb-2 w-full">RESULTADO DA COMBINAÇÃO</h2>
+              <h2 className="text-3xl font-display font-bold mb-10 border-b-2 border-zinc-400/30 pb-4 w-full">RESULTADO DA COMBINAÇÃO</h2>
               
               <div className="relative w-64 h-64 flex items-center justify-center mb-8">
                 <svg className="absolute w-full h-full text-arcane-gold/20" viewBox="0 0 100 100">
@@ -202,26 +202,26 @@ const RuneBuilder: React.FC = () => {
                 </div>
               </div>
 
-              <div className="w-full text-left font-sans italic text-sm space-y-4">
+              <div className="w-full text-left font-sans italic space-y-6">
                 <div>
-                  <span className="font-bold block text-xs not-italic uppercase tracking-tighter opacity-70">Nomes das Runas:</span>
-                  <p className="uppercase font-bold text-zinc-900/80">
+                  <span className="font-bold block text-sm not-italic uppercase tracking-tighter opacity-70 mb-1">Nomes das Runas:</span>
+                  <p className="uppercase font-bold text-xl text-zinc-900/90 leading-tight">
                     {selectedCore?.name} | VETOR DE {selectedVector?.name} | MODULADOR DE {selectedModulator?.name}
                   </p>
                 </div>
                 <div>
-                  <span className="font-bold block text-xs not-italic uppercase tracking-tighter opacity-70">Poder Gerado:</span>
-                  <p className="text-zinc-800 leading-tight">{spellResult?.power}</p>
+                  <span className="font-bold block text-sm not-italic uppercase tracking-tighter opacity-70 mb-1">Poder Gerado:</span>
+                  <p className="text-zinc-800 text-lg leading-relaxed">{spellResult?.power}</p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 flex justify-between items-end">
-              <div className="max-w-[200px]">
-                <span className="font-bold block text-xs not-italic uppercase tracking-tighter opacity-70 mb-1">Nome em Português:</span>
-                <h3 className="text-2xl font-power tracking-tight text-red-900/90">{spellResult?.title}</h3>
+            <div className="mt-12 flex justify-between items-end">
+              <div className="max-w-[300px]">
+                <span className="font-bold block text-sm not-italic uppercase tracking-tighter opacity-70 mb-2">Nome em Português:</span>
+                <h3 className="text-4xl font-power tracking-tight text-red-900/95 leading-none">{spellResult?.title}</h3>
               </div>
-              <button onClick={saveSpell} className="bg-red-900 text-white font-display px-4 py-2 rounded-sm text-xs shadow-lg">SALVAR</button>
+              <button onClick={saveSpell} className="bg-red-900 text-white font-display px-8 py-4 rounded-sm text-sm shadow-2xl hover:bg-red-800 transition-all transform hover:scale-105 active:scale-95">SALVAR</button>
             </div>
           </motion.div>
         </section>
