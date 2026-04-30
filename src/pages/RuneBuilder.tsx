@@ -57,7 +57,6 @@ const RuneBuilder: React.FC = () => {
           <div className="magic-circle-container">
             <div className="transmutation-circle"></div>
             
-            {/* TRINITY GLOW CIRCLE */}
             <svg viewBox="0 0 100 100" className="w-full h-full absolute z-10">
               <defs>
                 <filter id="glow">
@@ -68,7 +67,6 @@ const RuneBuilder: React.FC = () => {
                 </filter>
               </defs>
               
-              {/* Connection Lines */}
               <motion.path 
                 d="M 50 20 L 80 75 L 20 75 Z" 
                 fill="none" 
@@ -79,7 +77,6 @@ const RuneBuilder: React.FC = () => {
                 style={{ filter: 'url(#glow)' }}
               />
 
-              {/* RUNE NODES */}
               <g transform="translate(50, 20)">
                 <circle r="8" fill="#1a1a1a" stroke={auraColor} strokeWidth="1" />
                 {selectedCore?.image && <image href={selectedCore.image} x="-6" y="-6" width="12" height="12" />}
@@ -95,7 +92,6 @@ const RuneBuilder: React.FC = () => {
                 {selectedModulator?.image && <image href={selectedModulator.image || '/stone-texture.png'} x="-6" y="-6" width="12" height="12" />}
               </g>
 
-              {/* CENTER GLOW */}
               <motion.circle 
                 cx="50" cy="56" r="5" 
                 fill={auraColor} 
@@ -128,45 +124,63 @@ const RuneBuilder: React.FC = () => {
             <div className="candle top-[-40px] left-[-20px]"><div className="candle-flame"></div></div>
             <div className="candle top-[-40px] right-[-20px]"><div className="candle-flame"></div></div>
             
-            <h2 className="mapa-title">MAPA DE RUNAS</h2>
+            <h2 className="mapa-title text-[#1a1a1a]">MAPA DE RUNAS</h2>
 
             <div className="ritual-triangle">
-              {/* RUNE LABELS & ICONS */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
-                <div className="w-24 h-24 rounded-full border-4 border-[#b8860b] p-1 bg-[#1a1a1a] shadow-xl">
-                  <img src={selectedCore?.image} className="w-full h-full object-contain" />
+              {/* HEAVY STRUCTURAL TRIANGLE */}
+              <svg className="absolute inset-0 w-full h-full -z-10" viewBox="0 0 100 100">
+                {/* Thick Stone-like Triangle */}
+                <path 
+                  d="M 50 15 L 85 85 L 15 85 Z" 
+                  fill="none" 
+                  stroke="#3d2b1f" 
+                  strokeWidth="6" 
+                  strokeLinejoin="round"
+                  style={{ filter: 'drop-shadow(0 4px 2px rgba(0,0,0,0.4))' }}
+                />
+                <path d="M 50 15 L 85 85 L 15 85 Z" fill="none" stroke="#5d4332" strokeWidth="2" strokeLinejoin="round" />
+                
+                {/* Inner Glow Lines */}
+                <motion.path 
+                  d="M 50 15 L 85 85 L 15 85 Z" 
+                  fill="none" 
+                  stroke={auraColor} 
+                  strokeWidth="0.5" 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.3 }}
+                />
+              </svg>
+
+              {/* RUNE SLOTS WITH FRAMES */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 flex items-center gap-6">
+                <div className="mapa-slot-frame" style={{ borderColor: auraColor }}>
+                  <img src={selectedCore?.image} className="w-4/5 h-4/5 object-contain" />
                 </div>
-                <div className="mt-4 text-center">
-                  <div className="font-bold text-[#3d2b1f] text-sm underline">RUNA DE {selectedCore?.element.toUpperCase()}:</div>
-                  <div className="text-[10px] text-[#3d2b1f] max-w-[150px] leading-tight">{selectedCore?.description}</div>
+                <div className="text-left max-w-[200px]">
+                  <div className="mapa-slot-label">RUNA DE {selectedCore?.element.toUpperCase()}:</div>
+                  <div className="mapa-slot-desc">{selectedCore?.description}</div>
                 </div>
               </div>
 
               <div className="absolute bottom-0 left-0 flex flex-col items-center">
-                <div className="w-20 h-20 rounded-full border-2 border-[#3d2b1f] p-1 bg-[#1a1a1a] opacity-80">
-                  {selectedVector && <img src={selectedVector.image} className="w-full h-full object-contain" />}
+                <div className="mapa-slot-frame">
+                  {selectedVector && <img src={selectedVector.image} className="w-4/5 h-4/5 object-contain" />}
                 </div>
-                <div className="mt-2 text-center">
-                  <div className="font-bold text-[#3d2b1f] text-[10px] uppercase">RUNA DE VETOR {selectedVector?.action}:</div>
-                  <div className="text-[9px] text-[#3d2b1f] max-w-[120px]">{selectedVector?.description}</div>
+                <div className="mt-4 text-center">
+                  <div className="mapa-slot-label">RUNA DE VETOR {selectedVector?.action.toUpperCase()}:</div>
+                  <div className="mapa-slot-desc max-w-[150px]">{selectedVector?.description}</div>
                 </div>
               </div>
 
               <div className="absolute bottom-0 right-0 flex flex-col items-center">
-                <div className="w-20 h-20 rounded-full border-2 border-[#3d2b1f] p-1 bg-[#1a1a1a] opacity-80">
-                  {selectedModulator && <img src={selectedModulator.image || '/stone-texture.png'} className="w-full h-full object-contain" />}
+                <div className="mapa-slot-frame">
+                  {selectedModulator && <img src={selectedModulator.image || '/stone-texture.png'} className="w-4/5 h-4/5 object-contain" />}
                 </div>
-                <div className="mt-2 text-center">
-                  <div className="font-bold text-[#3d2b1f] text-[10px] uppercase">RUNA MODULADORA:</div>
-                  <div className="text-[9px] text-[#3d2b1f] max-w-[120px]">{selectedModulator?.description}</div>
+                <div className="mt-4 text-center">
+                  <div className="mapa-slot-label">RUNA MODULADORA:</div>
+                  <div className="mapa-slot-desc max-w-[150px]">{selectedModulator?.description}</div>
                 </div>
               </div>
-
-              {/* Connection Triangle SVG */}
-              <svg className="absolute inset-0 w-full h-full -z-10 opacity-20" viewBox="0 0 100 100">
-                <path d="M 50 15 L 85 85 L 15 85 Z" fill="none" stroke="#3d2b1f" strokeWidth="0.5" />
-                <path d="M 50 15 L 15 85 M 50 15 L 85 85 M 15 85 L 85 85" stroke="#3d2b1f" strokeWidth="0.2" strokeDasharray="1 1" />
-              </svg>
             </div>
 
             <div className="candle bottom-[-40px] left-1/2 -translate-x-1/2"><div className="candle-flame"></div></div>
