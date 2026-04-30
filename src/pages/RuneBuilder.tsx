@@ -151,21 +151,21 @@ const RuneBuilder: React.FC = () => {
 
       <main className="flex-1 flex flex-col lg:flex-row gap-8 overflow-hidden relative z-10">
         
-        <section className="flex-1 lg:max-w-md xl:max-w-lg">
+        <section className="flex-1 lg:max-w-2xl xl:max-w-3xl h-full">
           <motion.div 
             initial={{ rotateY: -10, opacity: 0 }}
             animate={{ rotateY: 0, opacity: 1 }}
-            className="parchment-texture w-full h-full p-8 md:p-12 relative rounded-sm text-zinc-900 flex flex-col justify-between magical-border"
+            className="parchment-texture w-full h-full p-12 md:p-20 relative rounded-sm text-zinc-900 flex flex-col justify-between magical-border"
           >
-            <div className="absolute top-4 right-4 w-10 h-10 bg-red-800 rounded-full shadow-lg flex items-center justify-center -rotate-12 border-2 border-red-900 border-dashed">
-              <span className="text-white font-display text-[8px]">OFFIC</span>
+            <div className="absolute top-6 right-6 w-16 h-16 bg-red-800 rounded-full shadow-2xl flex items-center justify-center -rotate-12 border-2 border-red-900 border-dashed z-20">
+              <span className="text-white font-display text-xs">CÓDICE</span>
             </div>
 
             <div className="flex flex-col items-center text-center">
-              <h2 className="text-3xl font-display font-bold mb-10 border-b-2 border-zinc-400/30 pb-4 w-full">RESULTADO DA COMBINAÇÃO</h2>
+              <h2 className="text-5xl font-display font-bold mb-14 border-b-4 border-zinc-400/30 pb-6 w-full tracking-tighter">RESULTADO DA COMBINAÇÃO</h2>
               
-              <div className="relative w-64 h-64 flex items-center justify-center mb-8">
-                <svg className="absolute w-full h-full text-arcane-gold/20" viewBox="0 0 100 100">
+              <div className="relative w-[450px] h-[450px] flex items-center justify-center mb-14">
+                <svg className="absolute w-full h-full text-arcane-gold/30" viewBox="0 0 100 100">
                   <polygon points="50,10 90,90 10,90" fill="none" stroke="currentColor" strokeWidth="0.5" />
                   <circle cx="50" cy="63.3" r="30" fill="none" stroke="currentColor" strokeWidth="0.5" />
                 </svg>
@@ -178,7 +178,7 @@ const RuneBuilder: React.FC = () => {
                     className="z-10 bg-white/20 p-6 rounded-full backdrop-blur-sm border border-white/40 shadow-xl"
                   >
                     {selectedCore && React.createElement(ICON_MAP[selectedCore.id], {
-                      size: 64,
+                      size: 160,
                       style: { color: selectedCore.color },
                       className: GLOW_MAP[selectedCore.id]
                     })}
@@ -186,42 +186,42 @@ const RuneBuilder: React.FC = () => {
                 </AnimatePresence>
 
                 <div className="absolute top-0 flex flex-col items-center">
-                  <div className="w-10 h-10 bg-black/80 rounded-full flex items-center justify-center border border-arcane-gold/40 shadow-lg">
-                    {selectedCore && React.createElement(ICON_MAP[selectedCore.id], { size: 18, style: { color: selectedCore.color } })}
+                  <div className="w-16 h-16 bg-black/95 rounded-full flex items-center justify-center border-2 border-arcane-gold/60 shadow-2xl">
+                    {selectedCore && React.createElement(ICON_MAP[selectedCore.id], { size: 32, style: { color: selectedCore.color } })}
                   </div>
                 </div>
                 <div className="absolute bottom-4 left-4">
-                   <div className="w-10 h-10 bg-black/80 rounded-full flex items-center justify-center border border-arcane-gold/40 shadow-lg">
-                    {selectedVector && React.createElement(ICON_MAP[selectedVector.id], { size: 18, style: { color: selectedVector.color } })}
+                   <div className="w-16 h-16 bg-black/95 rounded-full flex items-center justify-center border-2 border-arcane-gold/60 shadow-2xl">
+                    {selectedVector && React.createElement(ICON_MAP[selectedVector.id], { size: 32, style: { color: selectedVector.color } })}
                   </div>
                 </div>
                 <div className="absolute bottom-4 right-4">
-                  <div className="w-10 h-10 bg-black/80 rounded-full flex items-center justify-center border border-arcane-gold/40 shadow-lg">
-                    {selectedModulator && React.createElement(ICON_MAP[selectedModulator.id], { size: 18, style: { color: selectedModulator.color } })}
+                  <div className="w-16 h-16 bg-black/95 rounded-full flex items-center justify-center border-2 border-arcane-gold/60 shadow-2xl">
+                    {selectedModulator && React.createElement(ICON_MAP[selectedModulator.id], { size: 32, style: { color: selectedModulator.color } })}
                   </div>
                 </div>
               </div>
 
-              <div className="w-full text-left font-sans italic space-y-6">
+              <div className="w-full text-left font-sans italic space-y-12">
                 <div>
-                  <span className="font-bold block text-sm not-italic uppercase tracking-tighter opacity-70 mb-1">Nomes das Runas:</span>
-                  <p className="uppercase font-bold text-xl text-zinc-900/90 leading-tight">
+                  <span className="font-bold block text-xl not-italic uppercase tracking-widest opacity-80 mb-3">Nomes das Runas:</span>
+                  <p className="uppercase font-bold text-4xl text-zinc-900 leading-none tracking-tight">
                     {selectedCore?.name} | VETOR DE {selectedVector?.name} | MODULADOR DE {selectedModulator?.name}
                   </p>
                 </div>
                 <div>
-                  <span className="font-bold block text-sm not-italic uppercase tracking-tighter opacity-70 mb-1">Poder Gerado:</span>
-                  <p className="text-zinc-800 text-lg leading-relaxed">{spellResult?.power}</p>
+                  <span className="font-bold block text-xl not-italic uppercase tracking-widest opacity-80 mb-3">Poder Gerado:</span>
+                  <p className="text-zinc-900 text-3xl leading-tight font-medium">{spellResult?.power}</p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-12 flex justify-between items-end">
-              <div className="max-w-[300px]">
-                <span className="font-bold block text-sm not-italic uppercase tracking-tighter opacity-70 mb-2">Nome em Português:</span>
-                <h3 className="text-4xl font-power tracking-tight text-red-900/95 leading-none">{spellResult?.title}</h3>
+            <div className="mt-20 flex justify-between items-end border-t-4 border-zinc-400/20 pt-10">
+              <div className="max-w-[600px]">
+                <span className="font-bold block text-xl not-italic uppercase tracking-widest opacity-80 mb-4">Nome em Português:</span>
+                <h3 className="text-8xl font-power tracking-tighter text-red-950 leading-none drop-shadow-2xl">{spellResult?.title}</h3>
               </div>
-              <button onClick={saveSpell} className="bg-red-900 text-white font-display px-8 py-4 rounded-sm text-sm shadow-2xl hover:bg-red-800 transition-all transform hover:scale-105 active:scale-95">SALVAR</button>
+              <button onClick={saveSpell} className="bg-red-950 text-white font-display px-16 py-8 rounded-sm text-xl shadow-2xl hover:bg-red-900 transition-all transform hover:scale-110 active:scale-95">SALVAR</button>
             </div>
           </motion.div>
         </section>
