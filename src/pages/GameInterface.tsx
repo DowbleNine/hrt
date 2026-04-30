@@ -77,7 +77,7 @@ export default function GameInterface() {
   const currentQ = [1,2,3,4].includes(step) ? questions.find(q => q.step === step) : null;
 
   return (
-    <div className="min-h-screen bg-dark-bg text-slate-text p-4 md:p-8 font-sans cyber-grid scanlines overflow-x-hidden flex flex-col justify-center items-center">
+    <div className="min-h-screen bg-dark-bg text-slate-text p-4 md:p-8 font-sans overflow-x-hidden flex flex-col justify-center items-center">
       
       {/* Toast Notification para a Conquista da Quest 4 */}
       <AnimatePresence>

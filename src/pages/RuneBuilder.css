@@ -1,8 +1,9 @@
 .rune-builder-page {
   min-height: 100vh;
-  background: radial-gradient(circle at center, #0a0e14 0%, #05070a 100%);
-  color: #e0e6ed;
-  font-family: 'Outfit', sans-serif;
+  background-image: url('/wood.png');
+  background-size: 500px;
+  color: #2c1e14;
+  font-family: 'Almendra', serif;
   display: flex;
   flex-direction: column;
 }
@@ -12,132 +13,172 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 242, 255, 0.1);
-  background: rgba(10, 14, 20, 0.8);
-  backdrop-filter: blur(10px);
+  border-bottom: 4px double #4a3728;
+  background: url('/parchment.png');
+  background-size: cover;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
 .rb-logo h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 4px;
-  background: linear-gradient(90deg, #00f2ff, #7000ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-family: 'Cinzel', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #4a3728;
   margin: 0;
+  text-shadow: 1px 1px 0px #b8860b;
 }
 
 .rb-subtitle {
-  font-size: 0.7rem;
-  opacity: 0.6;
-  letter-spacing: 2px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  color: #8b5a2b;
+  letter-spacing: 3px;
   text-transform: uppercase;
+  font-weight: bold;
 }
 
 .rb-main {
   display: grid;
-  grid-template-columns: 350px 1fr 350px;
+  grid-template-columns: 380px 1fr 380px;
   flex: 1;
-  gap: 1px;
-  background: rgba(0, 242, 255, 0.05);
+  gap: 0;
+  background: rgba(0,0,0,0.2);
 }
 
 .rb-panel {
-  background: #0a0e14;
-  padding: 2rem;
+  background: url('/parchment.png');
+  background-size: cover;
+  padding: 2.5rem;
   overflow-y: auto;
   max-height: calc(100vh - 80px);
+  border-right: 2px solid #4a3728;
+  border-left: 2px solid #4a3728;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
+}
+
+.rb-panel:last-child {
+  border-left: 2px solid #4a3728;
+  border-right: none;
 }
 
 .rb-panel h2 {
-  font-size: 0.9rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
   letter-spacing: 2px;
-  color: #00f2ff;
-  margin-bottom: 1.5rem;
+  color: #4a3728;
+  margin-bottom: 2rem;
   text-transform: uppercase;
-  border-left: 3px solid #00f2ff;
-  padding-left: 10px;
+  border-bottom: 2px solid #b8860b;
+  display: inline-block;
+  padding-bottom: 5px;
 }
 
 .rb-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .rb-item {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 1rem;
+  background: url('/wood.png');
+  background-size: 200px;
+  border: 3px solid #4a3728;
+  border-radius: 8px;
+  padding: 1.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3), inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.rb-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.2);
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .rb-item:hover {
-  background: rgba(0, 242, 255, 0.05);
-  border-color: rgba(0, 242, 255, 0.3);
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.02);
+  border-color: #b8860b;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4), inset 0 0 15px rgba(0,0,0,0.6);
 }
 
 .rb-item.active {
-  background: rgba(0, 242, 255, 0.1);
-  border-color: #00f2ff;
-  box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+  border-color: #b8860b;
+  box-shadow: 0 0 20px rgba(184, 134, 11, 0.4), inset 0 0 20px rgba(0,0,0,0.7);
+  transform: scale(1.05);
+}
+
+.rb-item.active::after {
+  content: '✨';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1.2rem;
 }
 
 .rb-item-icon {
-  width: 50px;
-  height: 50px;
-  margin-bottom: 0.5rem;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 0.8rem;
+  z-index: 1;
 }
 
 .rb-item-icon svg {
   width: 100%;
   height: 100%;
   fill: none;
-  stroke: #e0e6ed;
-  stroke-width: 2;
-  transition: stroke 0.3s;
+  stroke: #f4e4bc; /* Parchment color for contrast on wood */
+  stroke-width: 3;
+  filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.8));
 }
 
 .rb-item.active .rb-item-icon svg {
-  stroke: #00f2ff;
-  filter: drop-shadow(0 0 5px #00f2ff);
+  stroke: #b8860b;
+  filter: drop-shadow(0 0 8px #b8860b);
 }
 
 .rb-item-name {
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #f4e4bc;
+  z-index: 1;
+  text-shadow: 1px 1px 2px #000;
 }
 
 .rb-workspace {
-  background: radial-gradient(circle at center, #10161f 0%, #0a0e14 100%);
+  background: url('/parchment.png');
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.1);
 }
 
 .rb-canvas-container {
-  width: 500px;
-  height: 500px;
+  width: 550px;
+  height: 550px;
   position: relative;
+  filter: sepia(0.3);
 }
 
 #rb-svg {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 0 30px rgba(0, 242, 255, 0.1));
+  filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
 }
 
 .rb-glow {
@@ -145,105 +186,110 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(0, 242, 255, 0.1) 0%, transparent 70%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(184, 134, 11, 0.1) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
-  animation: pulse-glow 4s infinite alternate;
-}
-
-@keyframes pulse-glow {
-  from { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-  to { opacity: 0.6; transform: translate(-50%, -50%) scale(1.2); }
 }
 
 .rb-action-bar {
   margin-top: 3rem;
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .btn-conjurar {
-  background: linear-gradient(135deg, #00f2ff 0%, #0072ff 100%);
-  color: #05070a;
-  border: none;
-  padding: 1rem 3rem;
-  font-family: 'Outfit', sans-serif;
+  background: #4a3728;
+  color: #f4e4bc;
+  border: 2px solid #b8860b;
+  padding: 1.2rem 4rem;
+  font-family: 'Cinzel', serif;
   font-weight: 700;
-  letter-spacing: 2px;
-  border-radius: 50px;
+  letter-spacing: 3px;
+  border-radius: 4px;
   cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0, 242, 255, 0.3);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
   transition: all 0.3s;
 }
 
 .btn-conjurar:hover {
-  transform: scale(1.05);
-  box-shadow: 0 15px 40px rgba(0, 242, 255, 0.5);
+  transform: translateY(-2px);
+  background: #5d4633;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5);
 }
 
 .rb-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.03);
+  border: 2px solid #4a3728;
+  border-radius: 4px;
+  padding: 1.8rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.rb-card::before {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px; right: 2px; bottom: 2px;
+  border: 1px solid #b8860b;
+  opacity: 0.2;
+  pointer-events: none;
 }
 
 .rb-card h3 {
-  font-size: 0.8rem;
-  color: #00f2ff;
-  margin-bottom: 1rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  color: #8b5a2b;
+  margin-bottom: 1.2rem;
   text-transform: uppercase;
-  opacity: 0.8;
+  font-weight: bold;
 }
 
 .rb-spell-name {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #fff;
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  color: #4a3728;
+  border-bottom: 1px solid #b8860b;
+  padding-bottom: 10px;
 }
 
 .rb-power-meter {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 }
 
 .rb-power-bar {
   flex: 1;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  border: 1px solid #4a3728;
   overflow: hidden;
 }
 
 .rb-power-fill {
   height: 100%;
-  background: #00f2ff;
-  box-shadow: 0 0 10px #00f2ff;
+  background: #b8860b;
+  box-shadow: none;
   transition: width 0.5s ease;
 }
 
-.path-core { stroke: #00f2ff; fill: none; stroke-linecap: round; stroke-linejoin: round; animation: draw 2s ease-out; }
-.path-vector { stroke: #ff00ff; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw-vector 1.5s forwards 0.5s; }
-.path-modulator { stroke: #fff; fill: none; stroke-width: 2; opacity: 0.6; }
-
-@keyframes draw {
-  from { stroke-dasharray: 1000; stroke-dashoffset: 1000; }
-  to { stroke-dashoffset: 0; }
-}
-
-@keyframes draw-vector {
-  to { stroke-dashoffset: 0; }
-}
+/* Custom SVG colors for parchment theme */
+.path-core { stroke: #2c1e14; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.path-vector { stroke: #8b5a2b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.path-modulator { stroke: #4a3728; fill: none; stroke-width: 2; opacity: 0.8; }
 
 .manifest-content {
-  font-size: 0.95rem;
+  font-family: 'Almendra', serif;
+  font-size: 1.1rem;
   line-height: 1.6;
-  color: #a0aec0;
+  color: #4a3728;
   font-style: italic;
+  background: rgba(255,255,255,0.2);
+  padding: 10px;
+  border-radius: 4px;
 }

@@ -1,34 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Almendra:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-sans: "Almendra", serif;
+  --font-display: "Cinzel", serif;
+  --font-mono: "Courier New", monospace;
   
-  --color-neon-green: #00ff9d;
-  --color-neon-cyan: #008cff;
-  --color-dark-bg: #05070a;
-  --color-dark-surface: #0d1117;
-  --color-dark-card: #0d1117;
-  --color-slate-text: #f8fafc;
-  --color-slate-border: rgba(255, 255, 255, 0.1);
+  --color-neon-green: #4a3728; /* Deep Wood */
+  --color-neon-cyan: #b8860b;  /* Aged Gold */
+  --color-dark-bg: #1a120b;    /* Darkest Wood */
+  --color-dark-surface: #2c1e14;
+  --color-dark-card: #f4e4bc;   /* Parchment Light */
+  --color-slate-text: #2c1e14;  /* Ink Brown */
+  --color-slate-border: #8b5a2b; /* Medium Wood */
 
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(0, 255, 157, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
-  }
-
-  @keyframes flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-    20%, 22%, 24%, 55% { opacity: 0.5; }
-  }
-
-  @keyframes scanline {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100vh); }
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
   }
 }
 
@@ -38,87 +27,52 @@
   }
   body {
     @apply bg-dark-bg text-slate-text font-sans antialiased overflow-x-hidden;
+    background-image: url('/wood.png');
+    background-size: 500px;
+    background-repeat: repeat;
   }
 
   h1, h2, h3, h4 {
-    @apply font-display font-extrabold tracking-tight;
-  }
-}
-
-@layer utilities {
-  .cyber-grid {
-    background-image: 
-      linear-gradient(rgba(0, 255, 157, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 255, 157, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-
-  /* CRT Scanlines Overlay */
-  .scanlines::after {
-    content: " ";
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-    z-index: 9999;
-    background-size: 100% 2px, 3px 100%;
-    pointer-events: none;
-    opacity: 0.4;
+    @apply font-display font-bold tracking-normal;
+    color: var(--color-neon-cyan);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
   }
 }
 
 @layer components {
-  .neon-bg {
-    @apply bg-neon-green text-dark-bg shadow-[0_0_20px_rgba(0,255,157,0.4)];
+  .parchment-bg {
+    background-image: url('/parchment.png');
+    background-size: cover;
+    background-position: center;
+    border: 8px double #4a3728;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 50px rgba(0,0,0,0.1);
   }
-  .neon-text {
-    @apply text-neon-green;
-    text-shadow: 0 0 10px rgba(0, 255, 157, 0.4);
-  }
-  .neon-border {
-    @apply border border-neon-green shadow-[0_0_15px_rgba(0,255,157,0.2)];
-  }
+
   .card {
-    @apply bg-dark-card border border-slate-border rounded-xl;
+    @apply bg-dark-card border-2 border-slate-border rounded-sm parchment-bg;
+    color: #2c1e14;
   }
-  .glitch-box {
-    @apply border border-neon-green/30 bg-black/40 backdrop-blur-md relative overflow-hidden;
-    box-shadow: inset 0 0 20px rgba(0,255,157,0.05);
+
+  .btn-primary {
+    @apply bg-[#4a3728] text-[#f4e4bc] font-display font-bold py-4 px-8 rounded-sm transition-all hover:brightness-110 active:scale-95 text-center uppercase tracking-widest border-2 border-[#b8860b];
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
   }
-  .glitch-box::before {
+
+  .btn-outline {
+    @apply border-2 border-[#4a3728] text-[#4a3728] hover:bg-[#4a3728]/10 font-bold py-2 px-6 rounded-sm transition-all text-center uppercase text-sm font-display;
+  }
+
+  .ancient-border {
+    border: 4px double #4a3728;
+    position: relative;
+  }
+
+  .ancient-border::after {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: var(--color-neon-green);
-    opacity: 0.5;
-    animation: scanline 6s linear infinite;
-  }
-  .flicker {
-    animation: flicker 4s infinite;
-  }
-  .glass {
-    @apply bg-[#0d1117]/60 backdrop-blur-xl border-b border-white/10;
-  }
-  .pulse {
-    @apply border-2 border-neon-green;
-    animation: pulse 2s infinite;
-  }
-  .elite-card {
-    background: linear-gradient(145deg, #0d1117, #061e38);
-  }
-  
-  .btn-primary {
-    @apply bg-neon-green text-dark-bg shadow-[0_0_20px_rgba(0,255,157,0.4)] font-bold py-4 px-8 rounded-xl transition-all hover:brightness-110 active:scale-95 text-center uppercase tracking-widest hover:translate-x-1;
-  }
-  .btn-outline {
-    @apply border border-neon-green/30 text-neon-green hover:bg-neon-green/10 hover:border-neon-green hover:translate-x-1 font-semibold py-2 px-6 rounded transition-all text-center uppercase text-sm;
-  }
-  .animate-pulse-neon {
-    @apply border-2 border-neon-green;
-    animation: pulse 2s infinite;
+    top: -10px; left: -10px; right: -10px; bottom: -10px;
+    border: 1px solid #b8860b;
+    pointer-events: none;
+    opacity: 0.3;
   }
 }

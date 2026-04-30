@@ -183,12 +183,12 @@ const RuneBuilder: React.FC = () => {
           <div className="rb-canvas-container">
             <svg id="rb-svg" viewBox="0 0 100 100">
               {selectedCore && (
-                <g className="core-group">
-                  <path d={selectedCore.path} className="path-core" strokeWidth={selectedCore.strokeWidth} />
+                <g className="core-group" style={{ filter: 'drop-shadow(1px 1px 1px rgba(0,0,0,0.3))' }}>
+                  <path d={selectedCore.path} className="path-core" strokeWidth={selectedCore.strokeWidth} stroke="#2c1e14" />
                   
                   {selectedVector && (
                     <g transform={`translate(${selectedCore.anchors[selectedVector.attachTo][0]}, ${selectedCore.anchors[selectedVector.attachTo][1]})`}>
-                      <path d={selectedVector.path} className="path-vector" strokeWidth="4" />
+                      <path d={selectedVector.path} className="path-vector" strokeWidth="4" stroke="#8b5a2b" />
                     </g>
                   )}
 
@@ -197,7 +197,7 @@ const RuneBuilder: React.FC = () => {
                     const offset = i * 12;
                     return (
                       <g key={mod.id} transform={`translate(${anchor[0] + (mod.position === 'right' ? offset : -offset)}, ${anchor[1]})`}>
-                        <path d={mod.path} className="path-modulator" />
+                        <path d={mod.path} className="path-modulator" stroke="#4a3728" />
                       </g>
                     );
                   })}
