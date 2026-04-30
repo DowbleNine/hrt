@@ -1,252 +1,142 @@
 export interface RuneBase {
   id: string;
   name: string;
-  path: string;
   description: string;
   image?: string;
-  color?: string;
+  color: string;
+  category: 'core' | 'vector' | 'modulator';
 }
 
 export interface CoreRune extends RuneBase {
+  category: 'core';
   element: string;
-  adjective: string;
-  strokeWidth: number;
-  anchors: {
-    top: [number, number];
-    bottom: [number, number];
-    left: [number, number];
-    right: [number, number];
-  };
 }
 
 export interface VectorRune extends RuneBase {
+  category: 'vector';
   action: string;
-  attachTo: 'top' | 'bottom' | 'left' | 'right';
 }
 
 export interface ModulatorRune extends RuneBase {
-  mod: string;
-  position: 'left' | 'right';
+  category: 'modulator';
+  property: string;
 }
 
 export const RUNE_DATA = {
   cores: {
-    pyros: {
-      id: "pyros",
-      name: "Pyros",
-      element: "Fogo",
-      adjective: "Ígneo",
-      description: "Calor, combustão e luz.",
-      path: "M 50 20 L 50 80 M 50 50 L 80 30 M 50 50 L 80 70",
-      strokeWidth: 6,
-      anchors: { top: [50, 20], bottom: [50, 80], left: [40, 50], right: [60, 50] },
-      image: "/assets/runes/pyros.png",
-      color: "#ff4d00"
+    fire: {
+      id: 'fire',
+      name: 'Fogo',
+      element: 'Fogo',
+      description: 'Canaliza calor intenso e combustão elemental.',
+      color: '#ff4d00',
+      category: 'core',
+      image: '/assets/runes/pyros.png'
     },
-    hydros: {
-      id: "hydros",
-      name: "Hydros",
-      element: "Água",
-      adjective: "Aquático",
-      description: "Fluidez, cura e gelo.",
-      path: "M 50 20 L 50 80",
-      strokeWidth: 8,
-      anchors: { top: [50, 20], bottom: [50, 80], left: [40, 50], right: [60, 50] },
-      image: "/assets/runes/hydros.png",
-      color: "#00d4ff"
+    water: {
+      id: 'water',
+      name: 'Água',
+      element: 'Água',
+      description: 'Manipula fluidos e energias regenerativas.',
+      color: '#00d4ff',
+      category: 'core',
+      image: '/assets/runes/hydros.png'
     },
-    haemus: {
-      id: "haemus",
-      name: "Haemus",
-      element: "Sangue",
-      adjective: "Sanguíneo",
-      description: "Vitalidade, sacrifício e controle orgânico.",
-      path: "M 30 20 L 30 80 L 70 80 L 70 20",
-      strokeWidth: 6,
-      anchors: { top: [50, 20], bottom: [50, 80], left: [30, 50], right: [70, 50] },
-      image: "/assets/runes/haemus.png",
-      color: "#ff0000"
+    earth: {
+      id: 'earth',
+      name: 'Terra',
+      element: 'Terra',
+      description: 'Manifesta força telúrica e solidez mineral.',
+      color: '#4ade80',
+      category: 'core',
+      image: '/assets/runes/geos.png'
     },
-    aethel: {
-      id: "aethel",
-      name: "Aethel",
-      element: "Ar",
-      adjective: "Etéreo",
-      description: "Vento, pressão e som.",
-      path: "M 40 20 L 40 80 M 40 30 L 70 45 M 40 50 L 70 65",
-      strokeWidth: 5,
-      anchors: { top: [40, 20], bottom: [40, 80], left: [30, 50], right: [70, 50] },
-      image: "/assets/runes/aethel.png",
-      color: "#ffffff"
-    },
-    fulgor: {
-      id: "fulgor",
-      name: "Fulgor",
-      element: "Raio",
-      adjective: "Elétrico",
-      description: "Eletricidade e magnetismo.",
-      path: "M 40 20 L 60 40 L 40 60 L 60 80",
-      strokeWidth: 5,
-      anchors: { top: [50, 20], bottom: [50, 80], left: [40, 50], right: [60, 50] },
-      image: "/assets/runes/fulgor.png",
-      color: "#bf00ff"
-    },
-    skotos: {
-      id: "skotos",
-      name: "Skotos",
-      element: "Sombra",
-      adjective: "Sombrio",
-      description: "Escuridão, ocultamento e vazio.",
-      path: "M 50 20 L 50 80 M 30 50 L 70 50",
-      strokeWidth: 4,
-      anchors: { top: [50, 20], bottom: [50, 80], left: [30, 50], right: [70, 50] },
-      image: "/assets/runes/skotos.png",
-      color: "#4b0082"
-    },
-    kinesis: {
-      id: "kinesis",
-      name: "Kinesis",
-      element: "Gravidade",
-      adjective: "Gravitacional",
-      description: "Peso, atração e repulsão.",
-      path: "M 30 30 L 70 70 M 70 30 L 30 70",
-      strokeWidth: 7,
-      anchors: { top: [50, 30], bottom: [50, 70], left: [30, 50], right: [70, 50] },
-      image: "/assets/runes/kinesis.png",
-      color: "#9400d3"
-    },
-    geos: {
-      id: "geos",
-      name: "Geos",
-      element: "Terra",
-      adjective: "Pétreo",
-      description: "Rocha, metal e estabilidade.",
-      path: "M 30 80 L 70 80 M 50 20 L 50 80 M 35 70 L 65 70",
-      strokeWidth: 7,
-      anchors: { top: [50, 20], bottom: [50, 80], left: [30, 50], right: [70, 50] },
-      image: "/assets/runes/geos.png",
-      color: "#ff8c00"
+    air: {
+      id: 'air',
+      name: 'Ar',
+      element: 'Ar',
+      description: 'Domina correntes atmosféricas e agilidade.',
+      color: '#a5f3fc',
+      category: 'core',
+      image: '/assets/runes/fulgor.png'
     }
   } as Record<string, CoreRune>,
+
   vectors: {
-    impetus: {
-      id: "impetus",
-      name: "Ímpetus",
-      action: "Disparo",
-      description: "Dispara em linha reta.",
-      path: "M -15 15 L 0 0 L 15 15 M 0 0 L 0 10",
-      attachTo: "top",
-      image: "/assets/runes/impetus.png"
+    direction: {
+      id: 'direction',
+      name: 'Direção',
+      action: 'Direção',
+      description: 'Guia a energia em trajetórias lineares.',
+      color: '#c5a059',
+      category: 'vector',
+      image: '/assets/runes/impetus.png'
     },
-    sphera: {
-      id: "sphera",
-      name: "Sphera",
-      action: "Explosão",
-      description: "Libera em 360°.",
-      path: "M -20 0 A 20 20 0 1 1 20 0",
-      attachTo: "top",
-      image: "/assets/runes/sphera.png"
+    speed: {
+      id: 'speed',
+      name: 'Velocidade',
+      action: 'Velocidade',
+      description: 'Acelera a propagação do efeito elemental.',
+      color: '#c5a059',
+      category: 'vector',
+      image: '/assets/runes/kinesis.png'
     },
-    murus: {
-      id: "murus",
-      name: "Murus",
-      action: "Barreira",
-      description: "Cria barreiras ou armaduras.",
-      path: "M -25 0 L 25 0 M -25 5 L 25 5",
-      attachTo: "bottom",
-      image: "/assets/runes/murus.png"
+    range: {
+      id: 'range',
+      name: 'Alcance',
+      action: 'Alcance',
+      description: 'Expande a distância de influência da magia.',
+      color: '#c5a059',
+      category: 'vector',
+      image: '/assets/runes/vertex.png'
     },
-    axis: {
-      id: "axis",
-      name: "Axis",
-      action: "Corte",
-      description: "Lâminas ou pontas perfurantes.",
-      path: "M -15 -10 L 0 5 L 15 -10",
-      attachTo: "bottom",
-      image: "/assets/runes/axis.png"
-    },
-    vertex: {
-      id: "vertex",
-      name: "Vertex",
-      action: "Vórtice",
-      description: "Giro em alta velocidade.",
-      path: "M -15 -15 A 15 15 0 1 1 15 15",
-      attachTo: "top",
-      image: "/assets/runes/vertex.png"
-    },
-    trajectum: {
-      id: "trajectum",
-      name: "Trajeto",
-      action: "Guia",
-      description: "Teleguiado pelo instinto arcano.",
-      path: "M -10 10 L 0 0 L 10 10 M 0 0 L 0 20",
-      attachTo: "top"
+    curve: {
+      id: 'curve',
+      name: 'Curva',
+      action: 'Curva',
+      description: 'Dobra a realidade para atingir alvos ocultos.',
+      color: '#c5a059',
+      category: 'vector',
+      image: '/assets/runes/trajeto.png'
     }
   } as Record<string, VectorRune>,
+
   modulators: {
-    magnus: {
-      id: "magnus",
-      name: "Magno",
-      mod: "Potente",
-      description: "Amplifica drasticamente o impacto e a área.",
-      path: "M -10 -10 L 10 10 M 10 -10 L -10 10",
-      position: "right"
+    intensity: {
+      id: 'intensity',
+      name: 'Intensidade',
+      property: 'Intensidade',
+      description: 'Amplifica a potência bruta do efeito.',
+      color: '#facc15',
+      category: 'modulator',
+      image: '/assets/runes/magnus.png'
     },
-    velox: {
-      id: "velox",
-      name: "Velox",
-      mod: "Veloz",
-      description: "Aumenta a velocidade.",
-      path: "M 0 -10 L 10 0 L 0 10",
-      position: "right"
+    duration: {
+      id: 'duration',
+      name: 'Duração',
+      property: 'Duração',
+      description: 'Mantém o efeito ativo por ciclos prolongados.',
+      color: '#facc15',
+      category: 'modulator',
+      image: '/assets/runes/haemus.png'
     },
-    aeterna: {
-      id: "aeterna",
-      name: "Aeterna",
-      mod: "Eterno",
-      description: "Aumenta a duração do efeito.",
-      path: "M 0 -15 L 0 15",
-      position: "left"
+    volume: {
+      id: 'volume',
+      name: 'Volume',
+      property: 'Volume',
+      description: 'Aumenta a massa física da manifestação.',
+      color: '#facc15',
+      category: 'modulator',
+      image: '/stone-texture.png'
     },
-    fragilis: {
-      id: "fragilis",
-      name: "Fragilis",
-      mod: "Ruptura",
-      description: "Foca em quebrar resistências.",
-      path: "M -5 -5 L 5 5 M 5 -5 L -5 5",
-      position: "left"
-    },
-    fixus: {
-      id: "fixus",
-      name: "Fixo",
-      mod: "Estável",
-      description: "Garantindo estabilidade e precisão absoluta.",
-      path: "M -15 0 L 15 0",
-      position: "left"
-    },
-    sincron: {
-      id: "sincron",
-      name: "Síncron",
-      mod: "Síncrono",
-      description: "Sincroniza fluxos de energia multidimensionais.",
-      path: "M -10 -5 L 0 0 L -10 5 M 10 -5 L 0 0 L 10 5",
-      position: "right"
-    },
-    levitas: {
-      id: "levitas",
-      name: "Levitas",
-      mod: "Leve",
-      description: "Reduz o peso e aumenta a agilidade.",
-      path: "M 0 5 L 0 -10 M -5 -5 L 0 -10 L 5 -5",
-      position: "left"
-    },
-    gravis: {
-      id: "gravis",
-      name: "Grave",
-      mod: "Pesado",
-      description: "Aumenta a densidade e o impacto físico.",
-      path: "M 0 -5 L 0 10 M -5 5 L 0 10 L 5 5",
-      position: "right"
+    secondary: {
+      id: 'secondary',
+      name: 'Secundário',
+      property: 'Secundário',
+      description: 'Adiciona uma ressonância harmônica extra.',
+      color: '#facc15',
+      category: 'modulator',
+      image: '/stone-texture.png'
     }
   } as Record<string, ModulatorRune>
 };
