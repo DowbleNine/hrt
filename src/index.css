@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Spectral:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400&family=Pirata+One&family=Metal+Mania&family=MedievalSharp&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=MedievalSharp&family=Metal+Mania&family=JetBrains+Mono:wght@400&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Spectral", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Cinzel", serif;
+  --font-sans: "MedievalSharp", cursive, system-ui, sans-serif;
+  --font-display: "Pirata One", cursive;
   --font-mono: "JetBrains Mono", monospace;
-  --font-gothic: "Pirata One", cursive;
+  --font-power: "Metal Mania", cursive;
   
   --color-arcane-gold: #c5a059;
   --color-arcane-fire: #ff4d00;
@@ -14,32 +14,20 @@
   --color-arcane-air: #a5f3fc;
   --color-parchment-light: #f4e4bc;
   --color-parchment-dark: #d2b48c;
-  
-  --color-gold: #b8860b;
-  --color-iron: #2c2c2c;
-  --color-wax-red: #8b0000;
-  --color-slate: #1a1a1a;
-}
-
-:root {
-  --bg-main: #1a1a1a;
-  --text-main: #f4e4bc;
-  --border-main: #c5a059;
 }
 
 @layer base {
   body {
-    @apply bg-[#1a1a1a] text-zinc-300 antialiased overflow-x-hidden;
+    @apply bg-[#1a1a1a] text-zinc-300 antialiased;
     background-image: radial-gradient(circle at center, #2a2218 0%, #121212 100%);
     font-family: var(--font-sans);
   }
 
   h1, h2, h3, h4 {
-    @apply font-display tracking-wider uppercase;
+    @apply font-display tracking-widest uppercase;
   }
 }
 
-/* Reference Aesthetic Classes */
 .parchment-texture {
   background-color: #f4e4bc;
   background-image: url("https://www.transparenttextures.com/patterns/old-mathematics.png");
@@ -63,15 +51,8 @@
   pointer-events: none;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: #1a1a1a; }
-::-webkit-scrollbar-thumb { 
-  background: #c5a059; 
-  border: 2px solid #1a1a1a;
-}
-
-.rune-glow-fire { filter: drop-shadow(0 0 12px rgba(255, 77, 0, 0.8)); }
-.rune-glow-ice { filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.8)); }
-.rune-glow-earth { filter: drop-shadow(0 0 12px rgba(74, 222, 128, 0.8)); }
-.rune-glow-air { filter: drop-shadow(0 0 12px rgba(165, 243, 252, 0.8)); }
+/* Specific glows */
+.rune-glow-fire { filter: drop-shadow(0 0 8px rgba(255, 77, 0, 0.6)); }
+.rune-glow-ice { filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6)); }
+.rune-glow-earth { filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.6)); }
+.rune-glow-air { filter: drop-shadow(0 0 8px rgba(165, 243, 252, 0.6)); }

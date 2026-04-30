@@ -219,7 +219,7 @@ const RuneBuilder: React.FC = () => {
             <div className="mt-8 flex justify-between items-end">
               <div className="max-w-[200px]">
                 <span className="font-bold block text-xs not-italic uppercase tracking-tighter opacity-70 mb-1">Nome em Português:</span>
-                <h3 className="text-xl font-display font-bold tracking-tight text-red-900/90">{spellResult?.title}</h3>
+                <h3 className="text-2xl font-power tracking-tight text-red-900/90">{spellResult?.title}</h3>
               </div>
               <button onClick={saveSpell} className="bg-red-900 text-white font-display px-4 py-2 rounded-sm text-xs shadow-lg">SALVAR</button>
             </div>
